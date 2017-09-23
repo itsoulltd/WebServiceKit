@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ActiveLive</key>
+	<true/>
+	<key>PingUrl</key>
+	<string>www.google.com</string>
+	<key>LiveUrl</key>
+	<string>https://api.hoxro.com</string>
+	<key>StagingUrl</key>
+	<string>http://213.136.82.93:81</string>
+	<key>Referer</key>
+	<string></string>
+	<key>URLScheme</key>
+	<string>http://</string>
+	<key>ForgotPassword</key>
+	<dict>
+		<key>routePath</key>
+		<string></string>
+		<key>httpMethod</key>
+		<string>Post</string>
+		<key>contentType</key>
+		<string>Json</string>
+	</dict>
+	<key>SignUp</key>
+	<dict>
+		<key>routePath</key>
+		<string>api/account/register</string>
+		<key>httpMethod</key>
+		<string>Post</string>
+		<key>contentType</key>
+		<string>Json</string>
+	</dict>
+	<key>SignIn</key>
+	<dict>
+		<key>routePath</key>
+		<string>token</string>
+		<key>httpMethod</key>
+		<string>Post</string>
+		<key>contentType</key>
+		<string>urlencoded</string>
+	</dict>
+</dict>
+</plist>
