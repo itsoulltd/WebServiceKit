@@ -10,7 +10,10 @@ import UIKit
 import CoreDataStack
 
 @objc(Response)
+@objcMembers
 open class Response: NGObject {
+    
+    public static let HttpStatusUnauthorizedAccessNotification = Notification.Name("HttpStatusUnauthorizedAccessNotification")
     
     required override public init(){
         super.init()
@@ -31,7 +34,7 @@ open class Response: NGObject {
     public var code: HttpStatusCode = HttpStatusCode.notFound {
         didSet{
             if code.rawValue == HttpStatusCode.unauthorized.rawValue  {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "UserSignOutNotification"), object: nil)
+                NotificationCenter.default.post(name: Response.HttpStatusUnauthorizedAccessNotification, object: nil)
             }
         }
     }
@@ -65,7 +68,8 @@ open class Response: NGObject {
     }
 }
 
-
+@objc(FieldError)
+@objcMembers
 open class FieldError: NGObject {
     public var objectName: NSString?
     public var field: NSString?

@@ -20,6 +20,7 @@ public struct RequestMetaKeys {
 }
 
 @objc(RequestMetadata)
+@objcMembers
 open class RequestMetadata: NGObject{
     
     var httpMethod: HTTP_METHOD!
