@@ -94,11 +94,16 @@ open class RequestMetadata: NGObject{
 @objc(RequestFactory)
 open class RequestFactory: NSObject{
     
-    var propertyList: PropertyList!
+    public var propertyList: PropertyList!
     
     public required init(configFileName fileName: String) {
         super.init()
         propertyList = PropertyList(fileName: fileName, directoryType: FileManager.SearchPathDirectory.documentDirectory, dictionary: true)
+    }
+    
+    public required init(propertyList property: PropertyList) {
+        super.init()
+        propertyList = property
     }
     
     public final func updateProperty(_ value: AnyObject, forKey key: String){

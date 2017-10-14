@@ -12,8 +12,8 @@ import CoreNetworkStack
 
 @objc(RequestQueueDelegate)
 public protocol RequestQueueDelegate{
-    func synchronizationSucceed(_ forRequest: HttpWebRequest?, incomming: Data) -> Void
-    func synchronizationFailed(_ forRequest: HttpWebRequest?, error: NSError?) -> Void
+    func requestDidSucceed(_ forRequest: HttpWebRequest?, incomming: Data) -> Void
+    func requestDidFailed(_ forRequest: HttpWebRequest?, error: NSError?) -> Void
     @objc optional func downloadSucceed(_ forRequest: HttpWebRequest?, saveUrl: URL) -> Void
     @objc optional func progressListener(_ forRequest: HttpWebRequest?) -> ProgressListener
 }
@@ -28,7 +28,7 @@ public protocol ProgressListener{
 @objc(ContentDelegateImpl)
 open class ContentDelegateImpl: NGObject, ContentDelegate {
     
-    weak var listener: ProgressListener?
+    public weak var listener: ProgressListener?
     
     open func progressHandler(_ handler: ContentHandler!, didFailedWithError error: Error!) {
         listener?.progressEnd!()
@@ -59,18 +59,18 @@ open class ContentDelegateImpl: NGObject, ContentDelegate {
 @objc(RequestQueueConfiguration)
 open class RequestQueueConfiguration: NGObject {
     //Hello I do not Have Properties 😜, but have keys
-    struct Keys {
-        static let MaxTryCount = "maxTryCount"
-        static let EnergyStateEnabled = "energyState"
+    public struct Keys {
+        public static let MaxTryCount = "maxTryCount"
+        public static let EnergyStateEnabled = "energyState"
     }
     
-    var identifier: NSString!
+    public var identifier: NSString!
     
-    init(identifier: NSString, info: NSDictionary){
+    public init(identifier: NSString, info: NSDictionary){
         super.init(info: info as! [AnyHashable: Any])
         self.identifier = identifier
     }
-
+    
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
@@ -120,7 +120,7 @@ open class Tracker: NGObject {
     }
     
     ///Ascending order
-    class func sort(_ list: [Tracker]) -> [Tracker]{
+    public class func sort(_ list: [Tracker]) -> [Tracker]{
         let sorted = list.sorted { (objA, objB) -> Bool in
             return objA.orderIndex.intValue < objB.orderIndex.intValue
         }
@@ -141,13 +141,13 @@ open class BaseRequestQueue: NSObject, RequestQueue {
     
     /***************************************THIS IS A GRAY AREA********************************************/
     
-    func addCompletionHandler(_ identifier: String, completionHandler: @escaping () -> Void){
+    public func addCompletionHandler(_ identifier: String, completionHandler: @escaping () -> Void){
         self.session.addCompletionHandler(completionHandler, forSession: identifier)
     }
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    init(configuration: RequestQueueConfiguration){
+    public init(configuration: RequestQueueConfiguration){
         super.init()
         self.configuration = configuration
         if let isEnabled = (configuration.value(forKey: RequestQueueConfiguration.Keys.EnergyStateEnabled) as AnyObject).boolValue{
@@ -164,12 +164,12 @@ open class BaseRequestQueue: NSObject, RequestQueue {
         print("deinit :: \(self.description)")
     }
     
-    func activateInternetReachability(){
+    public func activateInternetReachability(){
         //register for NetworkActivity's notification
         NotificationCenter.default.addObserver(self, selector: #selector(BaseRequestQueue.internetReachability(_:)), name: NSNotification.Name.InternetReachable, object: nil)
     }
     
-    func deactivateInternetReachability(){
+    public func deactivateInternetReachability(){
         //unregister from Notification Center
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.InternetReachable, object: nil)
     }
@@ -196,10 +196,10 @@ open class BaseRequestQueue: NSObject, RequestQueue {
     fileprivate var runningQueue = Queue()
     fileprivate var cancelableContainer = NSMutableDictionary(capacity: 7)
     fileprivate let lock = NSLock()
-    weak var delegate: RequestQueueDelegate?
+    public weak var delegate: RequestQueueDelegate?
     fileprivate var configuration: RequestQueueConfiguration!
     
-    var networkReachable: Bool{
+    public var networkReachable: Bool{
         return (NetworkActivity.sharedInstance() as AnyObject).isInternetReachable()
     }
     
@@ -327,7 +327,7 @@ open class BaseRequestQueue: NSObject, RequestQueue {
             if let httpResponse = response as? HTTPURLResponse{
                 if (httpResponse.statusCode == HttpStatusCode.ok.rawValue
                     || httpResponse.statusCode == HttpStatusCode.created.rawValue){
-                        self.whenSucceed(data)
+                    self.whenSucceed(data)
                 }else{
                     self.whenFailed(error)
                 }
@@ -351,7 +351,7 @@ open class BaseRequestQueue: NSObject, RequestQueue {
                 self.requestQueue.enqueue(tracker)
             }
             else{
-                self.delegate?.synchronizationFailed(tracker.request, error: error)
+                self.delegate?.requestDidFailed(tracker.request, error: error)
             }
         }
     }
@@ -361,7 +361,7 @@ open class BaseRequestQueue: NSObject, RequestQueue {
         //print("\(NSStringFromClass(type(of: self))) -> is running on \(String(cString: DISPATCH_CURRENT_QUEUE_LABEL.label))")
         if let tracker = self.runningQueue.dequeue() as? Tracker{
             if data is NSData{
-                self.delegate?.synchronizationSucceed(tracker.request, incomming: data as! Data)
+                self.delegate?.requestDidSucceed(tracker.request, incomming: data as! Data)
             }
             else if data is NSURL{
                 if let downloadSucceed = self.delegate?.downloadSucceed{
@@ -382,7 +382,7 @@ open class SavableRequestQueue: BaseRequestQueue {
     fileprivate var orderIndex: Int = -1
     fileprivate var manager: PropertyList!
     
-    override init(configuration: RequestQueueConfiguration){
+    public override init(configuration: RequestQueueConfiguration){
         super.init(configuration: configuration)
         self.identifier = configuration.identifier as String
         //
@@ -393,7 +393,7 @@ open class SavableRequestQueue: BaseRequestQueue {
         NotificationCenter.default.addObserver(self, selector: #selector(SavableRequestQueue.applicationDidEnterBackground(_:)), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
     }
     
-    convenience init(configuration: RequestQueueConfiguration, remoteSession: RemoteSession){
+    public convenience init(configuration: RequestQueueConfiguration, remoteSession: RemoteSession){
         self.init(configuration: configuration)
         self.session = remoteSession
     }
@@ -402,7 +402,7 @@ open class SavableRequestQueue: BaseRequestQueue {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
     }
     
-    @objc func applicationDidEnterBackground(_ notification: Notification){
+    @objc public func applicationDidEnterBackground(_ notification: Notification){
         print("\(NSStringFromClass(type(of: self))) -> applicationDidEnterBackground Called")
         saveState()
     }
@@ -468,7 +468,7 @@ open class SavableRequestQueue: BaseRequestQueue {
         //complex end
     }
     
-    fileprivate func restoreState(){
+    public func restoreState(){
         //New Implementation.
         let _queue = temporaryQueue()
         restoreQueue(from: _queue)
@@ -528,7 +528,7 @@ open class SavableRequestQueue: BaseRequestQueue {
             else{
                 self.removeState(tracker)
                 self.saveState()
-                self.delegate?.synchronizationFailed(tracker.request, error: error)
+                self.delegate?.requestDidFailed(tracker.request, error: error)
             }
         }
     }
@@ -539,7 +539,7 @@ open class SavableRequestQueue: BaseRequestQueue {
             self.removeState(tracker)
             self.saveState()
             if data is NSData{
-                self.delegate?.synchronizationSucceed(tracker.request, incomming: data as! Data)
+                self.delegate?.requestDidSucceed(tracker.request, incomming: data as! Data)
             }
             else if data is NSURL{
                 if let downloadSucceed = self.delegate?.downloadSucceed{
@@ -639,15 +639,15 @@ open class UploadOnceQueue: UploadQueue {
         }
     }
     
-    func applicationDidEnterBackground(){
+    public func applicationDidEnterBackground(){
         backgroundModeActivated = true
     }
     
-    func applicationWillEnterForeground(){
+    public func applicationWillEnterForeground(){
         backgroundModeActivated = false
     }
     
-    override func addCompletionHandler(_ identifier: String, completionHandler: @escaping () -> Void) {
+    override public func addCompletionHandler(_ identifier: String, completionHandler: @escaping () -> Void) {
         super.addCompletionHandler(identifier, completionHandler: completionHandler)
         applicationDidEnterBackground()
     }
