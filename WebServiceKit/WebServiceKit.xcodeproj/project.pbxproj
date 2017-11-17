@@ -12,10 +12,10 @@
 		26456F181F766686003AEF53 /* CoreDataStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26456F161F766686003AEF53 /* CoreDataStack.framework */; };
 		26456F191F766700003AEF53 /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F121F766675003AEF53 /* RequestFactory.swift */; };
 		26456F1A1F766703003AEF53 /* RequestList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26456F131F766675003AEF53 /* RequestList.plist */; };
-		26456F1B1F766707003AEF53 /* BaseRequestQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F091F766675003AEF53 /* BaseRequestQueue.swift */; };
+		26456F1B1F766707003AEF53 /* RequestQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F091F766675003AEF53 /* RequestQueue.swift */; };
 		26456F1C1F76670B003AEF53 /* HttpStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F0A1F766675003AEF53 /* HttpStatusCode.swift */; };
 		26456F1D1F766739003AEF53 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F0C1F766675003AEF53 /* Response.swift */; };
-		26456F1E1F766739003AEF53 /* RequestProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F0E1F766675003AEF53 /* RequestProcessor.swift */; };
+		26456F1E1F766739003AEF53 /* TransactionProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F0E1F766675003AEF53 /* TransactionProcessor.swift */; };
 		26456F1F1F766739003AEF53 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F0F1F766675003AEF53 /* Transaction.swift */; };
 		26456F201F766739003AEF53 /* TransactionStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F101F766675003AEF53 /* TransactionStack.swift */; };
 /* End PBXBuildFile section */
@@ -24,10 +24,10 @@
 		26456EFD1F766613003AEF53 /* WebServiceKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WebServiceKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26456F001F766613003AEF53 /* WebServiceKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebServiceKit.h; sourceTree = "<group>"; };
 		26456F011F766613003AEF53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		26456F091F766675003AEF53 /* BaseRequestQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequestQueue.swift; sourceTree = "<group>"; };
+		26456F091F766675003AEF53 /* RequestQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestQueue.swift; sourceTree = "<group>"; };
 		26456F0A1F766675003AEF53 /* HttpStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpStatusCode.swift; sourceTree = "<group>"; };
 		26456F0C1F766675003AEF53 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
-		26456F0E1F766675003AEF53 /* RequestProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProcessor.swift; sourceTree = "<group>"; };
+		26456F0E1F766675003AEF53 /* TransactionProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionProcessor.swift; sourceTree = "<group>"; };
 		26456F0F1F766675003AEF53 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		26456F101F766675003AEF53 /* TransactionStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionStack.swift; sourceTree = "<group>"; };
 		26456F121F766675003AEF53 /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 		26456F081F766675003AEF53 /* UtilityKit */ = {
 			isa = PBXGroup;
 			children = (
-				26456F091F766675003AEF53 /* BaseRequestQueue.swift */,
+				26456F091F766675003AEF53 /* RequestQueue.swift */,
 				26456F0A1F766675003AEF53 /* HttpStatusCode.swift */,
 				26456F0B1F766675003AEF53 /* Model */,
 				26456F0D1F766675003AEF53 /* TransactionProcessor */,
@@ -99,7 +99,7 @@
 		26456F0D1F766675003AEF53 /* TransactionProcessor */ = {
 			isa = PBXGroup;
 			children = (
-				26456F0E1F766675003AEF53 /* RequestProcessor.swift */,
+				26456F0E1F766675003AEF53 /* TransactionProcessor.swift */,
 				26456F0F1F766675003AEF53 /* Transaction.swift */,
 				26456F101F766675003AEF53 /* TransactionStack.swift */,
 			);
@@ -205,10 +205,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				26456F1D1F766739003AEF53 /* Response.swift in Sources */,
-				26456F1E1F766739003AEF53 /* RequestProcessor.swift in Sources */,
+				26456F1E1F766739003AEF53 /* TransactionProcessor.swift in Sources */,
 				26456F1F1F766739003AEF53 /* Transaction.swift in Sources */,
 				26456F201F766739003AEF53 /* TransactionStack.swift in Sources */,
-				26456F1B1F766707003AEF53 /* BaseRequestQueue.swift in Sources */,
+				26456F1B1F766707003AEF53 /* RequestQueue.swift in Sources */,
 				26456F1C1F76670B003AEF53 /* HttpStatusCode.swift in Sources */,
 				26456F191F766700003AEF53 /* RequestFactory.swift in Sources */,
 			);
@@ -347,6 +347,7 @@
 				);
 				INFOPLIST_FILE = WebServiceKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.swift.WebServiceKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -373,6 +374,7 @@
 				);
 				INFOPLIST_FILE = WebServiceKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.swift.WebServiceKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";

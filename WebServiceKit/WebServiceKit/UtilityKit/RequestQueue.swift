@@ -25,6 +25,154 @@ public protocol ProgressListener{
     @objc optional func progressEnd() -> Void;
 }
 
+/// 👉 Don't use use PersistableSynchronizer(or any subclass) from background thread.
+/// this class is not thread safe. Calling from other then Main Thread might causes crash.
+@objc(DownloadQueue)
+open class DownloadQueue: SavableRequestQueue {
+    
+    fileprivate override func execute() {
+        if !networkReachable{
+            return
+        }
+        if let tracker = requestQueue.dequeue() as? Tracker{
+            if preCancelCheck(tracker.request){
+                execute()
+            }
+            else{
+                runningQueue.enqueue(tracker)
+                reconstructProgressHandlerFor(tracker)
+                NetworkActivity.sharedInstance().start()
+                let task = session.downloadContent(tracker.request, progressDelegate: tracker.delegate, onCompletion: { (url, response, error) -> Void in
+                    NetworkActivity.sharedInstance().stop()
+                    self.removeTask(tracker.request)
+                    self.onCompletion(url as AnyObject!, response: response, error: error as NSError!)
+                })
+                addTask(task!, forTracker: tracker)
+            }
+        }
+    }
+    
+}
+
+/// 👉 Don't use PersistableSynchronizer(or any subclass) from background thread.
+/// this class is not thread safe. Calling from other then Main Thread might causes crash.
+@objc(UploadQueue)
+open class UploadQueue: SavableRequestQueue {
+    
+    fileprivate override func execute() {
+        if !networkReachable{
+            return
+        }
+        if let tracker = requestQueue.dequeue() as? Tracker{
+            if preCancelCheck(tracker.request){
+                execute()
+            }
+            else{
+                runningQueue.enqueue(tracker)
+                if tracker.request is HttpFileRequest{
+                    reconstructProgressHandlerFor(tracker)
+                    NetworkActivity.sharedInstance().start()
+                    let task = session.uploadContent(tracker.request as! HttpFileRequest, progressDelegate: tracker.delegate, onCompletion: { (data, response, error) -> Void in
+                        //
+                        NetworkActivity.sharedInstance().stop()
+                        self.removeTask(tracker.request)
+                        self.onCompletion(data as AnyObject!, response: response, error: error as NSError!)
+                    })
+                    addTask(task!, forTracker: tracker)
+                }
+                else{
+                    super.execute()
+                }
+            }
+        }
+    }
+    
+}
+
+/// 👉 Don't use PersistableSynchronizer(or any subclass) from background thread.
+/// this class is not thread safe. Calling from other then Main Thread might causes crash.
+@objc(UploadOnceQueue)
+open class UploadOnceQueue: UploadQueue {
+    
+    fileprivate var backgroundModeActivated = false
+    fileprivate var lastTracker: Tracker? {
+        get{
+            guard let unarchived = UserDefaults.standard.object(forKey: "CurrentTrackerKey") as? Data else{
+                return nil
+            }
+            let tracker = NSKeyedUnarchiver.unarchiveObject(with: unarchived) as? Tracker
+            return tracker
+        }
+        set{
+            self.lastTracker = newValue
+            if let nValue = newValue{
+                let archived = NSKeyedArchiver.archivedData(withRootObject: nValue)
+                UserDefaults.standard.set(archived, forKey: "CurrentTrackerKey")
+                //NSUserDefaults.standardUserDefaults().synchronize()
+            }
+        }
+    }
+    
+    public func applicationDidEnterBackground(){
+        backgroundModeActivated = true
+    }
+    
+    public func applicationWillEnterForeground(){
+        backgroundModeActivated = false
+    }
+    
+    override public func addCompletionHandler(_ identifier: String, completionHandler: @escaping () -> Void) {
+        super.addCompletionHandler(identifier, completionHandler: completionHandler)
+        applicationDidEnterBackground()
+    }
+    
+    fileprivate func ignore(tracker: Tracker) -> Bool{
+        if let lTracker = lastTracker{
+            if tracker.guid == lTracker.guid{
+                return true
+            }
+        }
+        lastTracker = tracker
+        return false
+    }
+    
+    fileprivate override func execute() {
+        if !networkReachable{
+            return
+        }
+        if let tracker = requestQueue.dequeue() as? Tracker{
+            if preCancelCheck(tracker.request){
+                execute()
+            }
+            else{
+                //Test
+                if ignore(tracker: tracker){
+                    execute()
+                    return
+                }
+                //
+                runningQueue.enqueue(tracker)
+                if tracker.request is HttpFileRequest{
+                    reconstructProgressHandlerFor(tracker)
+                    NetworkActivity.sharedInstance().start()
+                    let task = session.uploadContent(tracker.request as! HttpFileRequest, progressDelegate: tracker.delegate, onCompletion: { (data, response, error) -> Void in
+                        NetworkActivity.sharedInstance().stop()
+                        self.removeTask(tracker.request)
+                        self.onCompletion(data as AnyObject!, response: response, error: error as NSError!)
+                    })
+                    addTask(task!, forTracker: tracker)
+                }
+                else{
+                    super.execute()
+                }
+            }
+        }
+    }
+    
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
 @objc(ContentDelegateImpl)
 open class ContentDelegateImpl: NGObject, ContentDelegate {
     
@@ -544,152 +692,6 @@ open class SavableRequestQueue: BaseRequestQueue {
             else if data is NSURL{
                 if let downloadSucceed = self.delegate?.downloadSucceed{
                     downloadSucceed(tracker.request, data as! URL)
-                }
-            }
-        }
-    }
-    
-}
-
-/// 👉 Don't use use PersistableSynchronizer(or any subclass) from background thread.
-/// this class is not thread safe. Calling from other then Main Thread might causes crash.
-@objc(DownloadQueue)
-open class DownloadQueue: SavableRequestQueue {
-    
-    fileprivate override func execute() {
-        if !networkReachable{
-            return
-        }
-        if let tracker = requestQueue.dequeue() as? Tracker{
-            if preCancelCheck(tracker.request){
-                execute()
-            }
-            else{
-                runningQueue.enqueue(tracker)
-                reconstructProgressHandlerFor(tracker)
-                NetworkActivity.sharedInstance().start()
-                let task = session.downloadContent(tracker.request, progressDelegate: tracker.delegate, onCompletion: { (url, response, error) -> Void in
-                    NetworkActivity.sharedInstance().stop()
-                    self.removeTask(tracker.request)
-                    self.onCompletion(url as AnyObject!, response: response, error: error as NSError!)
-                })
-                addTask(task!, forTracker: tracker)
-            }
-        }
-    }
-    
-}
-
-/// 👉 Don't use PersistableSynchronizer(or any subclass) from background thread.
-/// this class is not thread safe. Calling from other then Main Thread might causes crash.
-@objc(UploadQueue)
-open class UploadQueue: SavableRequestQueue {
-    
-    fileprivate override func execute() {
-        if !networkReachable{
-            return
-        }
-        if let tracker = requestQueue.dequeue() as? Tracker{
-            if preCancelCheck(tracker.request){
-                execute()
-            }
-            else{
-                runningQueue.enqueue(tracker)
-                if tracker.request is HttpFileRequest{
-                    reconstructProgressHandlerFor(tracker)
-                    NetworkActivity.sharedInstance().start()
-                    let task = session.uploadContent(tracker.request as! HttpFileRequest, progressDelegate: tracker.delegate, onCompletion: { (data, response, error) -> Void in
-                        //
-                        NetworkActivity.sharedInstance().stop()
-                        self.removeTask(tracker.request)
-                        self.onCompletion(data as AnyObject!, response: response, error: error as NSError!)
-                    })
-                    addTask(task!, forTracker: tracker)
-                }
-                else{
-                    super.execute()
-                }
-            }
-        }
-    }
-    
-}
-
-/// 👉 Don't use PersistableSynchronizer(or any subclass) from background thread.
-/// this class is not thread safe. Calling from other then Main Thread might causes crash.
-@objc(UploadOnceQueue)
-open class UploadOnceQueue: UploadQueue {
-    
-    fileprivate var backgroundModeActivated = false
-    fileprivate var lastTracker: Tracker? {
-        get{
-            guard let unarchived = UserDefaults.standard.object(forKey: "CurrentTrackerKey") as? Data else{
-                return nil
-            }
-            let tracker = NSKeyedUnarchiver.unarchiveObject(with: unarchived) as? Tracker
-            return tracker
-        }
-        set{
-            self.lastTracker = newValue
-            if let nValue = newValue{
-                let archived = NSKeyedArchiver.archivedData(withRootObject: nValue)
-                UserDefaults.standard.set(archived, forKey: "CurrentTrackerKey")
-                //NSUserDefaults.standardUserDefaults().synchronize()
-            }
-        }
-    }
-    
-    public func applicationDidEnterBackground(){
-        backgroundModeActivated = true
-    }
-    
-    public func applicationWillEnterForeground(){
-        backgroundModeActivated = false
-    }
-    
-    override public func addCompletionHandler(_ identifier: String, completionHandler: @escaping () -> Void) {
-        super.addCompletionHandler(identifier, completionHandler: completionHandler)
-        applicationDidEnterBackground()
-    }
-    
-    fileprivate func ignore(tracker: Tracker) -> Bool{
-        if let lTracker = lastTracker{
-            if tracker.guid == lTracker.guid{
-                return true
-            }
-        }
-        lastTracker = tracker
-        return false
-    }
-    
-    fileprivate override func execute() {
-        if !networkReachable{
-            return
-        }
-        if let tracker = requestQueue.dequeue() as? Tracker{
-            if preCancelCheck(tracker.request){
-                execute()
-            }
-            else{
-                //Test
-                if ignore(tracker: tracker){
-                    execute()
-                    return
-                }
-                //
-                runningQueue.enqueue(tracker)
-                if tracker.request is HttpFileRequest{
-                    reconstructProgressHandlerFor(tracker)
-                    NetworkActivity.sharedInstance().start()
-                    let task = session.uploadContent(tracker.request as! HttpFileRequest, progressDelegate: tracker.delegate, onCompletion: { (data, response, error) -> Void in
-                        NetworkActivity.sharedInstance().stop()
-                        self.removeTask(tracker.request)
-                        self.onCompletion(data as AnyObject!, response: response, error: error as NSError!)
-                    })
-                    addTask(task!, forTracker: tracker)
-                }
-                else{
-                    super.execute()
                 }
             }
         }

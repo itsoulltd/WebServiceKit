@@ -11,39 +11,39 @@ import UIKit
 import CoreDataStack
 import CoreNetworkStack
 
-public protocol RequestProcessingProtocol: NSObjectProtocol{
+public protocol TransactionProcessingProtocol: NSObjectProtocol{
     var parserType: Response.Type {get set}
     var request: HttpWebRequest {get set}
-    var linkedProcess: RequestProcessingProtocol? {get set}
+    var linkedProcess: TransactionProcessingProtocol? {get set}
     var workingMemory: [String: AnyObject] {get}
     var workingMemoryHandler: ((_ previous: [String: AnyObject]) -> [String: AnyObject]) {get set}
     func addObjectToMemory(_ value: AnyObject, key: String) -> Void
     func copyObject(fromMemory memory: [String: AnyObject], key: String) -> Void
     func copyAll(_ from: [String: AnyObject]) -> Void
-    func execute(_ success: @escaping ((_ next: RequestProcessingProtocol?, _ previousResponse: [NGObjectProtocol]?) -> Void), failed: @escaping ((_ abort: Bool, _ reason: Response) -> Void)) -> Void
+    func execute(_ success: @escaping ((_ next: TransactionProcessingProtocol?, _ previousResponse: [NGObjectProtocol]?) -> Void), failed: @escaping ((_ abort: Bool, _ reason: Response) -> Void)) -> Void
 }
 
-public protocol RequestProcessorDelegate: NSObjectProtocol{
-    func processingDidFinished(_ processor: RequestProcessor, finalResponse: [NGObjectProtocol]?) -> Void
-    func processingDidFailed(_ processor: RequestProcessor, failedResponse: NGObjectProtocol) -> Void
-    func processingWillStart(_ processor: RequestProcessor, forProcess process: RequestProcessingProtocol) -> Void
-    func processingDidEnd(_ processor: RequestProcessor, forProcess process: RequestProcessingProtocol) -> Void
+public protocol TransactionProcessorDelegate: NSObjectProtocol{
+    func processingDidFinished(_ processor: TransactionProcessor, finalResponse: [NGObjectProtocol]?) -> Void
+    func processingDidFailed(_ processor: TransactionProcessor, failedResponse: NGObjectProtocol) -> Void
+    func processingWillStart(_ processor: TransactionProcessor, forProcess process: TransactionProcessingProtocol) -> Void
+    func processingDidEnd(_ processor: TransactionProcessor, forProcess process: TransactionProcessingProtocol) -> Void
 }
 
-open class RequestProcessor: NSObject{
+open class TransactionProcessor: NSObject{
     
-    fileprivate var stack: [RequestProcessingProtocol] = [RequestProcessingProtocol]()
+    fileprivate var stack: [TransactionProcessingProtocol] = [TransactionProcessingProtocol]()
     fileprivate var abortMark: Bool = false
-    fileprivate weak var delegate: RequestProcessorDelegate?
+    fileprivate weak var delegate: TransactionProcessorDelegate?
     fileprivate var errorResponseType: NGObject.Type!
     
-    public required init(delegate: RequestProcessorDelegate?, errorResponse: NGObject.Type = NGObject.self){
+    public required init(delegate: TransactionProcessorDelegate?, errorResponse: NGObject.Type = NGObject.self){
         super.init()
         self.delegate = delegate
         self.errorResponseType = errorResponse
     }
     
-    public final func push(process: RequestProcessingProtocol){
+    public final func push(process: TransactionProcessingProtocol){
         if let last = stack.last{
             process.linkedProcess = last
         }

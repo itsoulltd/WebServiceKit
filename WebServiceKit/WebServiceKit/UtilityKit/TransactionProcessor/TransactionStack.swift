@@ -9,18 +9,18 @@ import UIKit
 import CoreDataStack
 import CoreNetworkStack
 
-open class TransactionStack: NSObject, RequestProcessorDelegate {
+open class TransactionStack: NSObject, TransactionProcessorDelegate {
     
-    fileprivate var processor: RequestProcessor!
+    fileprivate var processor: TransactionProcessor!
     fileprivate var callBack: ((_ received: [NGObjectProtocol]?) -> Void)?
     
     required public init(callBack: ((_ received: [NGObjectProtocol]?) -> Void)?) {
         super.init()
         self.callBack = callBack
-        self.processor = RequestProcessor(delegate: self, errorResponse: Response.self)
+        self.processor = TransactionProcessor(delegate: self, errorResponse: Response.self)
     }
     
-    open func push(_ process: RequestProcessingProtocol){
+    open func push(_ process: TransactionProcessingProtocol){
         self.processor.push(process: process)
     }
     
@@ -32,25 +32,25 @@ open class TransactionStack: NSObject, RequestProcessorDelegate {
         self.processor.abort()
     }
     
-    open func processingDidFinished(_ processor: RequestProcessor, finalResponse: [NGObjectProtocol]?) {
+    open func processingDidFinished(_ processor: TransactionProcessor, finalResponse: [NGObjectProtocol]?) {
         guard let callBack = self.callBack else{
             return
         }
         callBack(finalResponse)
     }
     
-    open func processingDidFailed(_ processor: RequestProcessor, failedResponse: NGObjectProtocol) {
+    open func processingDidFailed(_ processor: TransactionProcessor, failedResponse: NGObjectProtocol) {
         guard let callBack = self.callBack else{
             return
         }
         callBack([failedResponse])
     }
     
-    open func processingWillStart(_ processor: RequestProcessor, forProcess process: RequestProcessingProtocol) {
+    open func processingWillStart(_ processor: TransactionProcessor, forProcess process: TransactionProcessingProtocol) {
         //TODO
     }
     
-    open func processingDidEnd(_ processor: RequestProcessor, forProcess process: RequestProcessingProtocol) {
+    open func processingDidEnd(_ processor: TransactionProcessor, forProcess process: TransactionProcessingProtocol) {
         //TODO
     }
 }

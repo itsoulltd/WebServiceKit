@@ -10,7 +10,7 @@ import Foundation
 import CoreDataStack
 import CoreNetworkStack
 
-public class Transaction: NSObject, RequestProcessingProtocol{
+public class Transaction: NSObject, TransactionProcessingProtocol{
 
     public required init(request: HttpWebRequest, parserType: Response.Type, memoryHandler: ((_ previous: [String: AnyObject]) -> [String: AnyObject])? = nil) {
         super.init()
@@ -68,8 +68,8 @@ public class Transaction: NSObject, RequestProcessingProtocol{
         }
     }
     
-    private weak var _linkedProcess: RequestProcessingProtocol?
-    public var linkedProcess: RequestProcessingProtocol? {
+    private weak var _linkedProcess: TransactionProcessingProtocol?
+    public var linkedProcess: TransactionProcessingProtocol? {
         get{
             return _linkedProcess
         }
@@ -88,7 +88,7 @@ public class Transaction: NSObject, RequestProcessingProtocol{
         }
     }
     
-    public func execute(_ success: @escaping ((_ next: RequestProcessingProtocol?, _ previousResponse: [NGObjectProtocol]?) -> Void), failed: @escaping ((_ abort: Bool, _ reason: Response) -> Void)) -> Void {
+    public func execute(_ success: @escaping ((_ next: TransactionProcessingProtocol?, _ previousResponse: [NGObjectProtocol]?) -> Void), failed: @escaping ((_ abort: Bool, _ reason: Response) -> Void)) -> Void {
         NetworkActivity.sharedInstance().start()
         RemoteSession.default().sendMessage(request) { (data, response, error) -> Void in
             
