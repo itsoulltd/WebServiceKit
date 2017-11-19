@@ -150,11 +150,6 @@ extension ViewController: RequestQueueDelegate{
     
     func requestDidSucceed(_ forRequest: HttpWebRequest?, incomming: Data) {
         //
-        do{
-            let _: AnyObject? = try JSONSerialization.jsonObject(with: incomming, options: .mutableContainers) as AnyObject
-        } catch let error as NSError{
-            print("Error In \(#function) at line \(#line) : \(error.debugDescription)")
-        }
     }
     
     func requestDidFailed(_ forRequest: HttpWebRequest?, error: NSError?) {
