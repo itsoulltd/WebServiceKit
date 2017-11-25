@@ -15,11 +15,14 @@ public class LocalNotificationCenter: NSObject {
         static var objectCache: NSMutableDictionary = NSMutableDictionary()
     }
     
-    class func registerLocalNotification(application: UIApplication, launchOptions: [NSObject: AnyObject]?){
+    class func registerLocalNotification(application: UIApplication, launchOptions: [UIApplicationLaunchOptionsKey: Any]?){
         //
         if #available(iOS 8.0, *) {
             application.registerUserNotificationSettings(UIUserNotificationSettings(types: [UIUserNotificationType.sound, UIUserNotificationType.alert, UIUserNotificationType.badge], categories: nil))
-        } else {
+        } else if #available(iOS 10, *){
+            //
+        }
+        else {
             // Fallback on earlier versions
         }
         if let launchOpt = launchOptions as NSDictionary?{

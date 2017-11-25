@@ -6,9 +6,23 @@
 	objectVersion = 48;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		26A1E4321FC80A89003F069E /* Aggregator */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 26A1E4331FC80A89003F069E /* Build configuration list for PBXAggregateTarget "Aggregator" */;
+			buildPhases = (
+				26A1E4361FC80A8E003F069E /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Aggregator;
+			productName = Aggregator;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		260A1F881FBF568B0052C507 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260A1F871FBF568B0052C507 /* AppDelegate.swift */; };
-		260A1F8A1FBF568B0052C507 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260A1F891FBF568B0052C507 /* ViewController.swift */; };
+		260A1F8A1FBF568B0052C507 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260A1F891FBF568B0052C507 /* RootViewController.swift */; };
 		260A1F8D1FBF568B0052C507 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 260A1F8B1FBF568B0052C507 /* Main.storyboard */; };
 		260A1F8F1FBF568B0052C507 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 260A1F8E1FBF568B0052C507 /* Assets.xcassets */; };
 		260A1F921FBF568B0052C507 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 260A1F901FBF568B0052C507 /* LaunchScreen.storyboard */; };
@@ -18,8 +32,7 @@
 		260A1F9C1FBF56AB0052C507 /* CoreDataStack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26456F161F766686003AEF53 /* CoreDataStack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		260A1F9D1FBF56AB0052C507 /* CoreNetworkStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26456F151F766686003AEF53 /* CoreNetworkStack.framework */; };
 		260A1F9E1FBF56AB0052C507 /* CoreNetworkStack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26456F151F766686003AEF53 /* CoreNetworkStack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		260A1FA21FBF58530052C507 /* UrlList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 260A1FA01FBF58520052C507 /* UrlList.plist */; };
-		260A1FA31FBF58530052C507 /* ImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260A1FA11FBF58530052C507 /* ImageViewerController.swift */; };
+		260A1FA21FBF58530052C507 /* wallpaper.plist in Resources */ = {isa = PBXBuildFile; fileRef = 260A1FA01FBF58520052C507 /* wallpaper.plist */; };
 		260A1FA61FBF58B20052C507 /* LocalNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260A1FA41FBF58B20052C507 /* LocalNotificationCenter.swift */; };
 		260A1FA71FBF58B20052C507 /* NTMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260A1FA51FBF58B20052C507 /* NTMonitor.swift */; };
 		2632D3E61FC0848700D8A216 /* FileSystemSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2632D3E41FC0847300D8A216 /* FileSystemSDK.framework */; };
@@ -35,6 +48,10 @@
 		26456F1E1F766739003AEF53 /* TransactionProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F0E1F766675003AEF53 /* TransactionProcessor.swift */; };
 		26456F1F1F766739003AEF53 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F0F1F766675003AEF53 /* Transaction.swift */; };
 		26456F201F766739003AEF53 /* TransactionStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F101F766675003AEF53 /* TransactionStack.swift */; };
+		26A1E4381FC82EB2003F069E /* XImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1E4371FC82EB2003F069E /* XImageViewerController.swift */; };
+		26A1E43A1FC838C9003F069E /* bikini.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26A1E4391FC838C9003F069E /* bikini.plist */; };
+		26A1E43E1FC83B43003F069E /* DownloadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1E43D1FC83B43003F069E /* DownloadCell.swift */; };
+		26A1E4401FC8A730003F069E /* TapableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1E43F1FC8A730003F069E /* TapableImageView.swift */; };
 		26AE8B131FC03874007F3A52 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AE8B121FC03874007F3A52 /* Utility.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,13 +85,12 @@
 /* Begin PBXFileReference section */
 		260A1F851FBF568B0052C507 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		260A1F871FBF568B0052C507 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		260A1F891FBF568B0052C507 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		260A1F891FBF568B0052C507 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		260A1F8C1FBF568B0052C507 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		260A1F8E1FBF568B0052C507 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		260A1F911FBF568B0052C507 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		260A1F931FBF568B0052C507 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		260A1FA01FBF58520052C507 /* UrlList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UrlList.plist; sourceTree = "<group>"; };
-		260A1FA11FBF58530052C507 /* ImageViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewerController.swift; sourceTree = "<group>"; };
+		260A1FA01FBF58520052C507 /* wallpaper.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = wallpaper.plist; sourceTree = "<group>"; };
 		260A1FA41FBF58B20052C507 /* LocalNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationCenter.swift; sourceTree = "<group>"; };
 		260A1FA51FBF58B20052C507 /* NTMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMonitor.swift; sourceTree = "<group>"; };
 		2632D3E41FC0847300D8A216 /* FileSystemSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FileSystemSDK.framework; sourceTree = "<group>"; };
@@ -91,6 +107,10 @@
 		26456F131F766675003AEF53 /* RequestList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RequestList.plist; sourceTree = "<group>"; };
 		26456F151F766686003AEF53 /* CoreNetworkStack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreNetworkStack.framework; path = WebServiceKit/CoreNetworkStack.framework; sourceTree = "<group>"; };
 		26456F161F766686003AEF53 /* CoreDataStack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDataStack.framework; path = WebServiceKit/CoreDataStack.framework; sourceTree = "<group>"; };
+		26A1E4371FC82EB2003F069E /* XImageViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XImageViewerController.swift; sourceTree = "<group>"; };
+		26A1E4391FC838C9003F069E /* bikini.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = bikini.plist; sourceTree = "<group>"; };
+		26A1E43D1FC83B43003F069E /* DownloadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadCell.swift; sourceTree = "<group>"; };
+		26A1E43F1FC8A730003F069E /* TapableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapableImageView.swift; sourceTree = "<group>"; };
 		26AE8B121FC03874007F3A52 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -210,8 +230,9 @@
 		265A06001FC083D90004FF93 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				260A1FA01FBF58520052C507 /* UrlList.plist */,
-				260A1F891FBF568B0052C507 /* ViewController.swift */,
+				26A1E43C1FC83A79003F069E /* Views */,
+				26A1E43B1FC83A68003F069E /* dataFiles */,
+				260A1F891FBF568B0052C507 /* RootViewController.swift */,
 				265A06011FC083EA0004FF93 /* ImageDisplayController */,
 			);
 			path = ViewController;
@@ -220,7 +241,8 @@
 		265A06011FC083EA0004FF93 /* ImageDisplayController */ = {
 			isa = PBXGroup;
 			children = (
-				260A1FA11FBF58530052C507 /* ImageViewerController.swift */,
+				26A1E4371FC82EB2003F069E /* XImageViewerController.swift */,
+				26A1E43F1FC8A730003F069E /* TapableImageView.swift */,
 			);
 			path = ImageDisplayController;
 			sourceTree = "<group>";
@@ -252,6 +274,23 @@
 				2632D3E41FC0847300D8A216 /* FileSystemSDK.framework */,
 			);
 			path = libs;
+			sourceTree = "<group>";
+		};
+		26A1E43B1FC83A68003F069E /* dataFiles */ = {
+			isa = PBXGroup;
+			children = (
+				26A1E4391FC838C9003F069E /* bikini.plist */,
+				260A1FA01FBF58520052C507 /* wallpaper.plist */,
+			);
+			path = dataFiles;
+			sourceTree = "<group>";
+		};
+		26A1E43C1FC83A79003F069E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				26A1E43D1FC83B43003F069E /* DownloadCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,6 +362,10 @@
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
 					};
+					26A1E4321FC80A89003F069E = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 26456EF71F766613003AEF53 /* Build configuration list for PBXProject "WebServiceKit" */;
@@ -340,6 +383,7 @@
 			targets = (
 				26456EFC1F766613003AEF53 /* WebServiceKit */,
 				260A1F841FBF568B0052C507 /* Example */,
+				26A1E4321FC80A89003F069E /* Aggregator */,
 			);
 		};
 /* End PBXProject section */
@@ -351,7 +395,8 @@
 			files = (
 				260A1F921FBF568B0052C507 /* LaunchScreen.storyboard in Resources */,
 				260A1F8F1FBF568B0052C507 /* Assets.xcassets in Resources */,
-				260A1FA21FBF58530052C507 /* UrlList.plist in Resources */,
+				260A1FA21FBF58530052C507 /* wallpaper.plist in Resources */,
+				26A1E43A1FC838C9003F069E /* bikini.plist in Resources */,
 				260A1F8D1FBF568B0052C507 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,16 +411,34 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		26A1E4361FC80A8E003F069E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Merge Script\n\n# 1\n# Set bash script to exit immediately if any commands fail.\nset -e\n\n# 2\n# Setup some constants for use later on.\nFRAMEWORK_NAME=\"WebServiceKit\"\n\n#Here we create default directory structure on desktop if not exist\nmkdir -p \"${HOME}/Desktop/NextGenBuilds/${FRAMEWORK_NAME}/FatBuild\"\nmkdir -p \"${HOME}/Desktop/NextGenBuilds/${FRAMEWORK_NAME}/Release\"\n\n# 3\n# If remnants from a previous build exist, delete them.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi\n\n# 4\n# Build the framework for device and for simulator (using\n# all needed architectures).\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Debug -arch arm64 -arch armv7 -arch armv7s only_active_arch=no defines_module=yes -sdk \"iphoneos\"\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Debug -arch x86_64 -arch i386 only_active_arch=no defines_module=yes -sdk \"iphonesimulator\"\n\n# 5\n# Remove .framework file if exists on Desktop from previous run.\nif [ -d \"${HOME}/Desktop/NextGenBuilds/${FRAMEWORK_NAME}/FatBuild/${FRAMEWORK_NAME}.framework\" ]; then\nrm -rf \"${HOME}/Desktop/NextGenBuilds/${FRAMEWORK_NAME}/FatBuild/${FRAMEWORK_NAME}.framework\"\nfi\n#Remove release build also\n# Remove .framework file if exists on Desktop from previous run.\nif [ -d \"${HOME}/Desktop/NextGenBuilds/${FRAMEWORK_NAME}/Release/${FRAMEWORK_NAME}.framework\" ]; then\nrm -rf \"${HOME}/Desktop/NextGenBuilds/${FRAMEWORK_NAME}/Release/${FRAMEWORK_NAME}.framework\"\nfi\n\n# 6\n# Copy the device version of framework to Desktop.\ncp -r \"${SRCROOT}/build/Debug-iphoneos/${FRAMEWORK_NAME}.framework\" \"${HOME}/Desktop/NextGenBuilds/${FRAMEWORK_NAME}/Release/${FRAMEWORK_NAME}.framework\"\n\ncp -r \"${SRCROOT}/build/Debug-iphoneos/${FRAMEWORK_NAME}.framework\" \"${HOME}/Desktop/NextGenBuilds/${FRAMEWORK_NAME}/FatBuild/${FRAMEWORK_NAME}.framework\"\n\n# 7\n# Replace the framework executable within the framework with\n# a new version created by merging the device and simulator\n# frameworks' executables with lipo.\nlipo -create -output \"${HOME}/Desktop/NextGenBuilds/${FRAMEWORK_NAME}/FatBuild/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Debug-iphoneos/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Debug-iphonesimulator/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\"\n\n# 8\n# Copy the Swift module mappings for the simulator into the\n# framework.  The device mappings already exist from step 6.\ncp -r \"${SRCROOT}/build/Debug-iphonesimulator/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule/\" \"${HOME}/Desktop/NextGenBuilds/${FRAMEWORK_NAME}/FatBuild/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule\"\n\n# 9\n# Delete the most recent build.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		260A1F811FBF568B0052C507 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				260A1F8A1FBF568B0052C507 /* ViewController.swift in Sources */,
+				26A1E4401FC8A730003F069E /* TapableImageView.swift in Sources */,
+				260A1F8A1FBF568B0052C507 /* RootViewController.swift in Sources */,
 				260A1F881FBF568B0052C507 /* AppDelegate.swift in Sources */,
 				26AE8B131FC03874007F3A52 /* Utility.swift in Sources */,
 				260A1FA71FBF58B20052C507 /* NTMonitor.swift in Sources */,
-				260A1FA31FBF58530052C507 /* ImageViewerController.swift in Sources */,
+				26A1E43E1FC83B43003F069E /* DownloadCell.swift in Sources */,
+				26A1E4381FC82EB2003F069E /* XImageViewerController.swift in Sources */,
 				260A1FA61FBF58B20052C507 /* LocalNotificationCenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -431,7 +494,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M622GQ77LE;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/WebServiceKit",
@@ -454,7 +517,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M622GQ77LE;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/WebServiceKit",
@@ -593,14 +656,13 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/WebServiceKit",
 				);
 				INFOPLIST_FILE = WebServiceKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.swift.WebServiceKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -620,20 +682,37 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/WebServiceKit",
 				);
 				INFOPLIST_FILE = WebServiceKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.swift.WebServiceKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		26A1E4341FC80A89003F069E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M622GQ77LE;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		26A1E4351FC80A89003F069E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M622GQ77LE;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -663,6 +742,15 @@
 			buildConfigurations = (
 				26456F061F766613003AEF53 /* Debug */,
 				26456F071F766613003AEF53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		26A1E4331FC80A89003F069E /* Build configuration list for PBXAggregateTarget "Aggregator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26A1E4341FC80A89003F069E /* Debug */,
+				26A1E4351FC80A89003F069E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

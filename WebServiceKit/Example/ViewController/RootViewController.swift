@@ -12,12 +12,14 @@ import CoreDataStack
 import WebServiceKit
 import FileSystemSDK
 
-class ViewController: UIViewController {
+class RootViewController: UIViewController {
+    
+    static let TapAnimViewTag = 100012
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var dataSource: [DownloadCellModel] = [DownloadCellModel]()
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var downloadLinkLabel: UITextField!
+    @IBOutlet weak var linkInputField: UITextField!
     var writeFile: File? = nil
     
     var vcdownloader: DownloadQueue = {
@@ -35,7 +37,7 @@ class ViewController: UIViewController {
         if tableView != nil{
             tableView.dataSource = self
             tableView.delegate = self
-            tableView.contentInset = UIEdgeInsets(top: -55, left: 0, bottom: 0, right: 0)
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
         //Load UrlList
         loadUrlList()
@@ -61,7 +63,7 @@ class ViewController: UIViewController {
     fileprivate var URList: [String] = [String]()
     
     fileprivate func loadUrlList(){
-        if let urlListPath = Bundle.main.url(forResource: "UrlList", withExtension: "plist"){
+        if let urlListPath = Bundle.main.url(forResource: "wallpaper", withExtension: "plist"){
             if let urls = NSArray(contentsOf: urlListPath){
                 for item in urls as! [String]{
                     URList.append(item)
@@ -84,7 +86,7 @@ class ViewController: UIViewController {
     @IBAction func downloadAction(sender: UIButton) {
         //
         var finalUrl: String?
-        if let hitUrl = downloadLinkLabel.text as NSString?{
+        if let hitUrl = linkInputField.text as NSString?{
             if (hitUrl.hasPrefix("http://") || hitUrl.hasPrefix("https://")){
                 finalUrl = hitUrl as String
             }
@@ -117,7 +119,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: RequestQueueDelegate{
+extension RootViewController: RequestQueueDelegate{
     
     //MARK: Utility Func
     
@@ -138,7 +140,7 @@ extension ViewController: RequestQueueDelegate{
         }
     }
     
-    func updateDownloadSavePath(forRequest: HttpWebRequest?, savePath: NSURL?) {
+    func updateDownloadSavePath(forRequest: HttpWebRequest?, savePath: URL?) {
         //
         if let model: DownloadCellModel = findModelFor(request: forRequest){
             model.savedUrl = savePath
@@ -165,39 +167,29 @@ extension ViewController: RequestQueueDelegate{
     }
     
     func downloadSucceed(_ forRequest: HttpWebRequest?, saveUrl: URL) {
-        
         let fileName = (forRequest?.baseUrl as NSString!).lastPathComponent
-        let tempImageFolder = Folder(name: "TempImage", searchDirectoryType: FileManager.SearchPathDirectory.cachesDirectory)
-        
-        guard let downloadData = NSData(contentsOf: saveUrl) else{
-            print("File Saving Operation Abort.")
-            return
-        }
-        let tempReadTuple = tempImageFolder.saveAs(fileName, data: downloadData as Data)
-        if let url = tempReadTuple{
-            let readFile = File(url: url)
-            let imagesFolder = Folder(name: "Images", searchDirectoryType: FileManager.SearchPathDirectory.cachesDirectory)
-            let writePath = imagesFolder.path()?.appendingPathComponent(fileName)
-            writeFile = File(url: URL(fileURLWithPath: writePath!))
-            writeFile?.writeAsynchFrom(readFile
-                , bufferSize: 2048
-                , progress: nil
-                , completionHandler: { [weak self] (done) in
+        let readFile = File(url: saveUrl)
+        let imagesFolder = Folder(name: "Images", searchDirectoryType: FileManager.SearchPathDirectory.cachesDirectory)
+        let writePath = imagesFolder.path()?.appendingPathComponent(fileName)
+        writeFile = File(url: URL(fileURLWithPath: writePath!))
+        writeFile?.writeAsynchFrom(readFile
+            , bufferSize: 2048
+            , progress: nil
+            , completionHandler: { [weak self] (done) in
                 if done{
                     print("Secure File Write Successful.")
-                    self?.updateDownloadSavePath(forRequest: forRequest, savePath: self?.writeFile?.URL as! NSURL)
+                    self?.updateDownloadSavePath(forRequest: forRequest, savePath: self?.writeFile?.URL)
                 }
                 else{
                     print("Secure File Write Failed.")
                 }
                 let _ = readFile.delete()
-            })
-        }
+        })
     }
     
 }
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
+extension RootViewController: UITableViewDataSource, UITableViewDelegate {
     
     func findModelFor(request: HttpWebRequest?) -> DownloadCellModel?{
         //
@@ -220,11 +212,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "DownloadCell") as! DownloadCell
         let model = dataSource[indexPath.row]
         cell.downloader = vcdownloader
         cell.updateDisplay(model: model)
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
         return cell
     }
     
@@ -232,24 +224,62 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return UIView(frame: CGRect())
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
-        tableView.deselectRow(at: indexPath as IndexPath, animated: false)
-        let model = dataSource[indexPath.row]
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        let model = self.dataSource[indexPath.row]
         if let _ = model.savedUrl{
-            //TODO: push image viewing controller
-            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "imageViewerController") as! ImageViewerController
-            viewController.model = model
-            if #available(iOS 8.0, *) {
-                show(viewController, sender: nil)
-            } else {
-                if let nav = self.navigationController{
-                    nav.pushViewController(viewController, animated: true)
-                }else{
-                    self.modalPresentationStyle = UIModalPresentationStyle.currentContext
-                    self.present(viewController, animated: true, completion: nil)
-                }
+            if let cell = tableView.cellForRow(at: indexPath){
+                let view = tapAnimView(cell.contentView.center, indexPath: indexPath)
+                cell.contentView.clipsToBounds = true
+                cell.contentView.addSubview(view)
             }
+        }
+        return indexPath
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = self.dataSource[indexPath.row]
+        if let _ = model.savedUrl{
+            deselectRow( tableView, at: indexPath, animated: true) {
+                //TODO: push image viewing controller
+                //Following code will go to Router
+                let viewController = self.storyboard?.instantiateViewController(withIdentifier: "XImageViewerController") as! XImageViewerController
+                viewController.model = model
+                if #available(iOS 8.0, *) {
+                    self.show(viewController, sender: nil)
+                } else {
+                    if let nav = self.navigationController{
+                        nav.pushViewController(viewController, animated: true)
+                    }else{
+                        self.modalPresentationStyle = UIModalPresentationStyle.currentContext
+                        self.present(viewController, animated: true, completion: nil)
+                    }
+                }
+                //
+            }
+        }
+    }
+    
+    fileprivate func tapAnimView(_ at: CGPoint, indexPath: IndexPath) -> UIView{
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        view.layer.cornerRadius = 40 / 2
+        view.layer.masksToBounds = true
+        view.backgroundColor = UIColor(white: 0.5, alpha: 0.4)
+        view.center = at
+        view.tag = RootViewController.TapAnimViewTag
+        return view
+    }
+    
+    fileprivate func deselectRow(_ tableView: UITableView, at indexPath: IndexPath, animated: Bool, onCompletion:(() -> Void)?){
+        if let cell = tableView.cellForRow(at: indexPath){
+            let view = cell.contentView.viewWithTag(RootViewController.TapAnimViewTag)
+            UIView.animate(withDuration: 0.4, animations: {
+                view?.transform = CGAffineTransform(scaleX: 11, y: 11)
+            }, completion: { (done) in
+                view?.removeFromSuperview()
+                if let completion = onCompletion{
+                    completion()
+                }
+            })
         }
     }
     
@@ -282,81 +312,5 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return [delete,cancel]
     }
     
-}
-
-class DownloadCell: UITableViewCell {
-    
-    weak var downloader: DownloadQueue!
-    @IBOutlet weak var pathLabel: UILabel!
-    @IBOutlet weak var progressBar: UIProgressView!
-    var model: DownloadCellModel!
-    
-    override func awakeFromNib() {
-        //
-    }
-    
-    func updateDisplay(model: DownloadCellModel){
-        //
-        self.model = model
-        pathLabel.text = (model.request?.baseUrl as NSString!).lastPathComponent
-        if model.savedUrl == nil{
-            if model.progress == nil{
-                progressBar.progress = 0.0
-                let prog = Progress()
-                model.progress = prog
-                model.progress?.progressBar = progressBar
-                downloader.enqueueRequest(model.request!, progressListener: model.progress)
-            }
-            else{
-                model.progress?.progressBar = progressBar
-            }
-            model.progress?.cell = self //FIXME:
-        }
-        else{
-            progressBar.progress = 1.0
-        }
-    }//
-    
-    @IBAction func cancelAction(sender: UIButton?){
-        //
-        if let model = self.model{
-            downloader.cancelRequest(model.request!)
-            LocalNotificationCenter.stepDownBadgeNumber(forType: "DownloadAction", message: "Download Cancel")
-        }
-    }
-}
-
-class DownloadCellModel: NGObject {
-    
-    var request: HttpWebRequest?
-    var progress: Progress?
-    var savedUrl: NSURL?
-}
-
-class Progress: NSObject, ProgressListener {
-    
-    weak var progressBar: UIProgressView!
-    weak var cell: DownloadCell! //FIXME:
-    
-    func progressStart() {
-        //
-        if cell != nil{
-            
-        }
-    }
-    
-    func progressUpdate(_ percentage: CGFloat) {
-        //
-        if progressBar != nil{
-            progressBar.progress = Float(percentage)
-        }
-    }
-    
-    func progressEnd() {
-        //
-        if progressBar != nil{
-            progressBar.progress = 1.0
-        }
-    }
 }
 

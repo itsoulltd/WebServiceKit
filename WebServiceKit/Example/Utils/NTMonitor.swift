@@ -30,19 +30,19 @@ public class NTUnit: NGObject{
         return formatter
     }
     
-    var type: NSString?
-    var frequency: NSNumber?
-    var lastFireDate: NSDate?
-    var exponentialRate: NSNumber?
-    var multiplier: NSNumber?
-    var multiplierInitialValue: NSNumber?
-    var multiplierMaxLimit: NSNumber?
+    @objc public var type: NSString?
+    @objc public var frequency: NSNumber?
+    @objc public var lastFireDate: NSDate?
+    @objc public var exponentialRate: NSNumber?
+    @objc public var multiplier: NSNumber?
+    @objc public var multiplierInitialValue: NSNumber?
+    @objc public var multiplierMaxLimit: NSNumber?
     
-    public override func updateDate(_ dateStr: String!) -> Date! {
+    @objc public override func updateDate(_ dateStr: String!) -> Date! {
         return NTUnit.defaultDateFormatter().date(from: dateStr)
     }
     
-    public override func serializeDate(_ date: Date!) -> String! {
+    @objc public override func serializeDate(_ date: Date!) -> String! {
         return NTUnit.defaultDateFormatter().string(from: date as Date)
     }
 }
@@ -71,9 +71,8 @@ public class NTMonitor: NSObject {
     func shouldFire(type:String, nowDate: NSDate = NSDate()) -> Bool{
         //
         if let obj = unitFor(type: type){
-            
             if (obj.lastFireDate == nil || obj.frequency == nil){
-                updateMonitoring(type: type, date: nowDate)
+                updateMonitoring(obj, type: type, date: nowDate)
                 return true
             }
             if let oldFireDate = obj.lastFireDate{
@@ -87,7 +86,7 @@ public class NTMonitor: NSObject {
                     let interval = nowDate.timeIntervalSince(oldFireDate as Date)
                     let isTrue = checkInterval(interval: interval, frequency: frequency, multiplier: multiplier.doubleValue)
                     if isTrue{
-                        updateMonitoring(type: type, date: nowDate)
+                        updateMonitoring(obj, type: type, date: nowDate)
                     }
                     return isTrue
                 }
@@ -117,19 +116,19 @@ public class NTMonitor: NSObject {
         }
     }
     
-    private func updateMonitoring(type:String, date: NSDate){
-        
-        if let obj = unitFor(type: type){
-            obj.lastFireDate = date
-            let flier = obj.multiplier!.doubleValue * obj.exponentialRate!.doubleValue
-            //If multiplierMaxLimit <= 0 then never meet the initial multiplier
-            if ((obj.multiplierMaxLimit?.doubleValue)! <= 0){
-                obj.multiplier = NSNumber(value: flier)
-            }else{
-                obj.multiplier = (flier <= (obj.multiplierMaxLimit?.doubleValue)!) ? NSNumber(value: flier) : obj.multiplierInitialValue
-            }
-            setUnit(obj: obj, forType: type)
+    private func updateMonitoring(_ objx: NTUnit?, type: String, date: NSDate){
+        guard let obj = objx else {
+            return
         }
+        obj.lastFireDate = date
+        let flier = obj.multiplier!.doubleValue * obj.exponentialRate!.doubleValue
+        //If multiplierMaxLimit <= 0 then never meet the initial multiplier
+        if ((obj.multiplierMaxLimit?.doubleValue)! <= 0){
+            obj.multiplier = NSNumber(value: flier)
+        }else{
+            obj.multiplier = (flier <= (obj.multiplierMaxLimit?.doubleValue)!) ? NSNumber(value: flier) : obj.multiplierInitialValue
+        }
+        setUnit(obj: obj, forType: type)
     }
     
     private func insertMonitoring(type: String, frequency: NTFrequency, exponentialRate: Double, multiplierInitialValue: Double, multiplierMaxLimit: Double, startDate: NSDate?){

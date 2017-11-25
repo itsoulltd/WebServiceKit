@@ -53,6 +53,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "26456EFC1F766613003AEF53"
+            BuildableName = "WebServiceKit.framework"
+            BlueprintName = "WebServiceKit"
+            ReferencedContainer = "container:WebServiceKit.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

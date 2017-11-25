@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         //Local Notification
-        LocalNotificationCenter.registerLocalNotification(application: application, launchOptions: launchOptions! as [NSObject : AnyObject])
+        LocalNotificationCenter.registerLocalNotification(application: application, launchOptions: launchOptions )
         NetworkActivity.sharedInstance().activateReachabilityObserver(withHostAddress: "www.google.com")
         return true
     }
