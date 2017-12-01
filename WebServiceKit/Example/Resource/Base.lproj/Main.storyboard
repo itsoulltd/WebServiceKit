@@ -43,7 +43,7 @@
                                                     <rect key="frame" x="8" y="42" width="359" height="2.5"/>
                                                 </progressView>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.21176470589999999" green="0.60784313729999995" blue="0.88235294119999996" alpha="0.14999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.65490196079999996" green="0.91372549020000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="BJ6-up-3vc" firstAttribute="leading" secondItem="Ycp-fZ-CWi" secondAttribute="leading" constant="8" id="3wq-EB-Brq"/>
                                                 <constraint firstItem="BJ6-up-3vc" firstAttribute="top" secondItem="Ycp-fZ-CWi" secondAttribute="top" constant="11" id="AAZ-tM-1n4"/>

@@ -40,7 +40,6 @@ class XImageViewerController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        selfView.layoutScrollView()
     }
     
     fileprivate var readFile: File? = nil

@@ -51,10 +51,10 @@ extension DownloadTableView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         let model = presenter.dataSource[indexPath.row]
         if let _ = model.savedUrl{
-            if let cell = tableView.cellForRow(at: indexPath){
-                let view = tapAnimView(cell.contentView.center, indexPath: indexPath)
+            if let cell = tableView.cellForRow(at: indexPath) as? DownloadCell{
+                let view = tapAnimView(cell.tapLocation, indexPath: indexPath)
                 cell.contentView.clipsToBounds = true
-                cell.contentView.addSubview(view)
+                cell.contentView.insertSubview(view, at: 0)
             }
         }
         return indexPath
@@ -73,7 +73,7 @@ extension DownloadTableView: UITableViewDataSource, UITableViewDelegate {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         view.layer.cornerRadius = 40 / 2
         view.layer.masksToBounds = true
-        view.backgroundColor = UIColor(white: 0.5, alpha: 0.4)
+        view.backgroundColor = UIColor.hex("#A9A9A9", alpha: 0.4)
         view.center = at
         view.tag = DownloadTableView.TapAnimViewTag
         return view
@@ -82,8 +82,9 @@ extension DownloadTableView: UITableViewDataSource, UITableViewDelegate {
     fileprivate func deselectRow(_ tableView: UITableView, at indexPath: IndexPath, animated: Bool, onCompletion:(() -> Void)?){
         if let cell = tableView.cellForRow(at: indexPath){
             let view = cell.contentView.viewWithTag(DownloadTableView.TapAnimViewTag)
+            let scale = (cell.contentView.bounds.width / view!.bounds.width) * 2
             UIView.animate(withDuration: 0.4, animations: {
-                view?.transform = CGAffineTransform(scaleX: 11, y: 11)
+                view?.transform = CGAffineTransform(scaleX: scale, y: scale)
             }, completion: { (done) in
                 view?.removeFromSuperview()
                 if let completion = onCompletion{

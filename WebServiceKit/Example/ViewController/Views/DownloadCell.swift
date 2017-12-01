@@ -21,13 +21,32 @@ class DownloadModel: NGObject {
 
 class DownloadCell: UITableViewCell {
     
+    static let backgroundColor = "A7E9FF"
+    
     weak var downloader: DownloadQueue!
     @IBOutlet weak var pathLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
     var model: DownloadModel!
+    var tapLocation: CGPoint = CGPoint()
     
     override func awakeFromNib() {
-        //
+        progressBar.progress = 0
+        contentView.backgroundColor = UIColor.hex(DownloadCell.backgroundColor, alpha: 0.6)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        tapLocation = contentView.center
+    }
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if let view = super.hitTest(point, with: event){
+            if view.bounds.contains(point){
+                tapLocation = point
+            }
+            return view
+        }
+        return nil
     }
     
     func updateDisplay(model: DownloadModel){
@@ -35,8 +54,8 @@ class DownloadCell: UITableViewCell {
         self.model = model
         pathLabel.text = (model.request?.baseUrl as NSString!).lastPathComponent
         if model.savedUrl == nil{
+            progressBar.progress = 0.0
             if model.progress == nil{
-                progressBar.progress = 0.0
                 let prog = Progress()
                 model.progress = prog
                 model.progress?.progressBar = progressBar

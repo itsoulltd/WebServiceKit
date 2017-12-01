@@ -54,7 +54,7 @@ class RootViewController: UIViewController {
     fileprivate var URList: [String] = [String]()
     
     fileprivate func loadUrlList(){
-        if let urlListPath = Bundle.main.url(forResource: "wallpaper", withExtension: "plist"){
+        if let urlListPath = Bundle.main.url(forResource: "bikini", withExtension: "plist"){
             if let urls = NSArray(contentsOf: urlListPath){
                 for item in urls as! [String]{
                     URList.append(item)

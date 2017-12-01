@@ -36,12 +36,18 @@ class XImageView: UIView {
         super.layoutSubviews()
         spinner.center = self.center
         spinner.startAnimating()
+        layoutSubviewsAfterOrientationChanges()
     }
     
-    func layoutScrollView() -> Void {
+    fileprivate func layoutSubviewsAfterOrientationChanges() -> Void {
         if self.scrollView != nil{
             self.scrollView.frame = bounds
+            setZoomProperty(scrollViewSize: self.scrollView.bounds.size)
             self.scrollView.center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
+            if scrollView.zoomScale < scrollView.minimumZoomScale{
+                scrollView.zoomScale = scrollView.minimumZoomScale
+            }
+            recenterImageViewContent()
         }
     }
     
@@ -59,13 +65,8 @@ class XImageView: UIView {
         let imageView = ZoomableImageView(image: img)
         self.imageView = imageView
         
-        //ImageView and ScrollView canvas retio
-        let scrollViewBounds = self.bounds
-        let xScale = scrollViewBounds.width / imageView.bounds.width
-        let yScale = scrollViewBounds.height / imageView.bounds.height
-        let minScale = min(xScale, yScale)
-        
         //Setup ScrollView
+        let scrollViewBounds = self.bounds
         let scrollView = UIScrollView(frame: scrollViewBounds)
         self.scrollView = scrollView
         scrollView.center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
@@ -80,16 +81,16 @@ class XImageView: UIView {
         scrollView.delegate = self
         scrollView.backgroundColor = UIColor.gray
         
-        //add imageView to scrollView
-        scrollView.addSubview(imageView)
-        
         //Setting ZoomScale
-        scrollView.minimumZoomScale = minScale
-        scrollView.maximumZoomScale = 10
-        scrollView.zoomScale = minScale
+        setZoomProperty(scrollViewSize: scrollViewBounds.size)
         
         //Setting ContentSize
         scrollView.contentSize = scrollView.bounds.size
+        
+        //add imageView to scrollView
+        scrollView.addSubview(imageView)
+        //ImageView Recenter
+        recenterImageViewContent()
         
         //Following line will forward pinch gesture on View to ScrollView
         self.addGestureRecognizer(scrollView.pinchGestureRecognizer!)
@@ -112,6 +113,18 @@ class XImageView: UIView {
         }
     }
     
+    fileprivate func setZoomProperty(scrollViewSize: CGSize){
+        
+        let imageSize = self.imageView.bounds.size
+        let xScale = scrollViewSize.width / imageSize.width
+        let yScale = scrollViewSize.height / imageSize.height
+        let minScale = min(xScale, yScale)
+        
+        scrollView.minimumZoomScale = minScale
+        scrollView.maximumZoomScale = 10
+        scrollView.zoomScale = minScale
+    }
+    
     fileprivate func zoomingRect(scale: CGFloat, center: CGPoint) -> CGRect{
         var rect = CGRect()
         rect.size.width = scrollView.bounds.width / scale
@@ -119,6 +132,18 @@ class XImageView: UIView {
         rect.origin.x = center.x - (rect.width / 2)
         rect.origin.y = center.y - (rect.height / 2)
         return rect
+    }
+    
+    fileprivate func recenterImageViewContent() {
+        
+        let scrollViewBounds = self.scrollView.bounds
+        let imageFrame = self.imageView.frame
+
+        let horizontalSpace = imageFrame.size.width < scrollViewBounds.size.width ? ((scrollViewBounds.size.width - imageFrame.size.width) / 2) : 0
+        let verticalSpace = imageFrame.size.height < scrollViewBounds.size.height ? ((scrollViewBounds.size.height - imageFrame.size.height) / 2) : 0
+
+        self.scrollView.contentInset = UIEdgeInsets(top: verticalSpace, left: horizontalSpace, bottom: verticalSpace, right: horizontalSpace)
+        
     }
 
 }
@@ -129,4 +154,7 @@ extension XImageView : UIScrollViewDelegate{
         return imageView
     }
     
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        //recenterImageViewContent()
+    }
 }
