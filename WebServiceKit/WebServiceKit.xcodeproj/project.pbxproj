@@ -48,11 +48,16 @@
 		26456F1E1F766739003AEF53 /* TransactionProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F0E1F766675003AEF53 /* TransactionProcessor.swift */; };
 		26456F1F1F766739003AEF53 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F0F1F766675003AEF53 /* Transaction.swift */; };
 		26456F201F766739003AEF53 /* TransactionStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F101F766675003AEF53 /* TransactionStack.swift */; };
+		26533D0F1FD1828F004DBFB4 /* XImageViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26533D0E1FD1828F004DBFB4 /* XImageViewRouter.swift */; };
 		26A1E4381FC82EB2003F069E /* XImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1E4371FC82EB2003F069E /* XImageViewerController.swift */; };
 		26A1E43A1FC838C9003F069E /* bikini.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26A1E4391FC838C9003F069E /* bikini.plist */; };
 		26A1E43E1FC83B43003F069E /* DownloadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1E43D1FC83B43003F069E /* DownloadCell.swift */; };
-		26A1E4401FC8A730003F069E /* TapableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1E43F1FC8A730003F069E /* TapableImageView.swift */; };
+		26A1E4401FC8A730003F069E /* ZoomableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1E43F1FC8A730003F069E /* ZoomableImageView.swift */; };
 		26AE8B131FC03874007F3A52 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AE8B121FC03874007F3A52 /* Utility.swift */; };
+		26AF4AE81FD1241900A5FF26 /* XImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF4AE71FD1241900A5FF26 /* XImageView.swift */; };
+		26AF4AEC1FD12C7600A5FF26 /* DownloadTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF4AEB1FD12C7600A5FF26 /* DownloadTableView.swift */; };
+		26AF4AEE1FD12CA100A5FF26 /* DownloadPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF4AED1FD12CA100A5FF26 /* DownloadPresenter.swift */; };
+		26AF4AF11FD149F900A5FF26 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF4AF01FD149F900A5FF26 /* Router.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,11 +112,16 @@
 		26456F131F766675003AEF53 /* RequestList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RequestList.plist; sourceTree = "<group>"; };
 		26456F151F766686003AEF53 /* CoreNetworkStack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreNetworkStack.framework; path = WebServiceKit/CoreNetworkStack.framework; sourceTree = "<group>"; };
 		26456F161F766686003AEF53 /* CoreDataStack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDataStack.framework; path = WebServiceKit/CoreDataStack.framework; sourceTree = "<group>"; };
+		26533D0E1FD1828F004DBFB4 /* XImageViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XImageViewRouter.swift; sourceTree = "<group>"; };
 		26A1E4371FC82EB2003F069E /* XImageViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XImageViewerController.swift; sourceTree = "<group>"; };
 		26A1E4391FC838C9003F069E /* bikini.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = bikini.plist; sourceTree = "<group>"; };
 		26A1E43D1FC83B43003F069E /* DownloadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadCell.swift; sourceTree = "<group>"; };
-		26A1E43F1FC8A730003F069E /* TapableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapableImageView.swift; sourceTree = "<group>"; };
+		26A1E43F1FC8A730003F069E /* ZoomableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableImageView.swift; sourceTree = "<group>"; };
 		26AE8B121FC03874007F3A52 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		26AF4AE71FD1241900A5FF26 /* XImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XImageView.swift; sourceTree = "<group>"; };
+		26AF4AEB1FD12C7600A5FF26 /* DownloadTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadTableView.swift; sourceTree = "<group>"; };
+		26AF4AED1FD12CA100A5FF26 /* DownloadPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadPresenter.swift; sourceTree = "<group>"; };
+		26AF4AF01FD149F900A5FF26 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +156,7 @@
 				265A06021FC084170004FF93 /* Utils */,
 				265A06001FC083D90004FF93 /* ViewController */,
 				260A1F871FBF568B0052C507 /* AppDelegate.swift */,
+				26AF4AF01FD149F900A5FF26 /* Router.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -230,9 +241,10 @@
 		265A06001FC083D90004FF93 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				260A1F891FBF568B0052C507 /* RootViewController.swift */,
+				26AF4AEF1FD1415600A5FF26 /* Presenter */,
 				26A1E43C1FC83A79003F069E /* Views */,
 				26A1E43B1FC83A68003F069E /* dataFiles */,
-				260A1F891FBF568B0052C507 /* RootViewController.swift */,
 				265A06011FC083EA0004FF93 /* ImageDisplayController */,
 			);
 			path = ViewController;
@@ -241,8 +253,10 @@
 		265A06011FC083EA0004FF93 /* ImageDisplayController */ = {
 			isa = PBXGroup;
 			children = (
+				26A1E43F1FC8A730003F069E /* ZoomableImageView.swift */,
 				26A1E4371FC82EB2003F069E /* XImageViewerController.swift */,
-				26A1E43F1FC8A730003F069E /* TapableImageView.swift */,
+				26AF4AE71FD1241900A5FF26 /* XImageView.swift */,
+				26533D0E1FD1828F004DBFB4 /* XImageViewRouter.swift */,
 			);
 			path = ImageDisplayController;
 			sourceTree = "<group>";
@@ -289,8 +303,17 @@
 			isa = PBXGroup;
 			children = (
 				26A1E43D1FC83B43003F069E /* DownloadCell.swift */,
+				26AF4AEB1FD12C7600A5FF26 /* DownloadTableView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		26AF4AEF1FD1415600A5FF26 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				26AF4AED1FD12CA100A5FF26 /* DownloadPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -432,14 +455,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26A1E4401FC8A730003F069E /* TapableImageView.swift in Sources */,
+				26A1E4401FC8A730003F069E /* ZoomableImageView.swift in Sources */,
+				26533D0F1FD1828F004DBFB4 /* XImageViewRouter.swift in Sources */,
 				260A1F8A1FBF568B0052C507 /* RootViewController.swift in Sources */,
 				260A1F881FBF568B0052C507 /* AppDelegate.swift in Sources */,
 				26AE8B131FC03874007F3A52 /* Utility.swift in Sources */,
 				260A1FA71FBF58B20052C507 /* NTMonitor.swift in Sources */,
+				26AF4AE81FD1241900A5FF26 /* XImageView.swift in Sources */,
 				26A1E43E1FC83B43003F069E /* DownloadCell.swift in Sources */,
 				26A1E4381FC82EB2003F069E /* XImageViewerController.swift in Sources */,
+				26AF4AEC1FD12C7600A5FF26 /* DownloadTableView.swift in Sources */,
+				26AF4AEE1FD12CA100A5FF26 /* DownloadPresenter.swift in Sources */,
 				260A1FA61FBF58B20052C507 /* LocalNotificationCenter.swift in Sources */,
+				26AF4AF11FD149F900A5FF26 /* Router.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

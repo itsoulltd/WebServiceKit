@@ -12,7 +12,7 @@ import CoreDataStack
 import WebServiceKit
 import CoreNetworkStack
 
-class DownloadCellModel: NGObject {
+class DownloadModel: NGObject {
     
     @objc public var request: HttpWebRequest?
     @objc public var progress: Progress?
@@ -24,13 +24,13 @@ class DownloadCell: UITableViewCell {
     weak var downloader: DownloadQueue!
     @IBOutlet weak var pathLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
-    var model: DownloadCellModel!
+    var model: DownloadModel!
     
     override func awakeFromNib() {
         //
     }
     
-    func updateDisplay(model: DownloadCellModel){
+    func updateDisplay(model: DownloadModel){
         //
         self.model = model
         pathLabel.text = (model.request?.baseUrl as NSString!).lastPathComponent
@@ -45,7 +45,6 @@ class DownloadCell: UITableViewCell {
             else{
                 model.progress?.progressBar = progressBar
             }
-            model.progress?.cell = self //FIXME:
         }
         else{
             progressBar.progress = 1.0
@@ -64,13 +63,9 @@ class DownloadCell: UITableViewCell {
 class Progress: NSObject, ProgressListener {
     
     weak var progressBar: UIProgressView!
-    weak var cell: DownloadCell! //FIXME:
     
     func progressStart() {
         //
-        if cell != nil{
-            
-        }
     }
     
     func progressUpdate(_ percentage: CGFloat) {

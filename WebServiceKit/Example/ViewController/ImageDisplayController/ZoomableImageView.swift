@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TapableImageView: UIImageView {
+class ZoomableImageView: UIImageView {
     
     var singleTap: ((_ location: CGPoint) -> Void)?
     var doubleTap: ((_ location: CGPoint) -> Void)?
@@ -26,11 +26,11 @@ class TapableImageView: UIImageView {
     
     fileprivate func setup(){
         isUserInteractionEnabled = true
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(TapableImageView.singleTapAction(sender:)))
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(ZoomableImageView.singleTapAction(sender:)))
         singleTap.numberOfTapsRequired = 1
         addGestureRecognizer(singleTap)
         
-        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(TapableImageView.doubleTapAction(sender:)))
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(ZoomableImageView.doubleTapAction(sender:)))
         doubleTap.numberOfTapsRequired = 2
         addGestureRecognizer(doubleTap)
         //Single Tap detection will delayed by double tap detection. 
