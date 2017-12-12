@@ -9,6 +9,8 @@ import UIKit
 import CoreDataStack
 import CoreNetworkStack
 
+@objc(TransactionStack)
+@objcMembers
 open class TransactionStack: NSObject, TransactionProcessorDelegate {
     
     fileprivate var processor: TransactionProcessor!

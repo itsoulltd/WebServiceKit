@@ -30,6 +30,8 @@ public protocol TransactionProcessorDelegate: NSObjectProtocol{
     func processingDidEnd(_ processor: TransactionProcessor, forProcess process: TransactionProcessingProtocol) -> Void
 }
 
+@objc(TransactionProcessor)
+@objcMembers
 open class TransactionProcessor: NSObject{
     
     fileprivate var stack: [TransactionProcessingProtocol] = [TransactionProcessingProtocol]()

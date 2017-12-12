@@ -50,7 +50,6 @@
 		26456F201F766739003AEF53 /* TransactionStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F101F766675003AEF53 /* TransactionStack.swift */; };
 		26533D0F1FD1828F004DBFB4 /* XImageViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26533D0E1FD1828F004DBFB4 /* XImageViewRouter.swift */; };
 		26A1E4381FC82EB2003F069E /* XImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1E4371FC82EB2003F069E /* XImageViewerController.swift */; };
-		26A1E43A1FC838C9003F069E /* bikini.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26A1E4391FC838C9003F069E /* bikini.plist */; };
 		26A1E43E1FC83B43003F069E /* DownloadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1E43D1FC83B43003F069E /* DownloadCell.swift */; };
 		26A1E4401FC8A730003F069E /* ZoomableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1E43F1FC8A730003F069E /* ZoomableImageView.swift */; };
 		26AE8B131FC03874007F3A52 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AE8B121FC03874007F3A52 /* Utility.swift */; };
@@ -114,7 +113,6 @@
 		26456F161F766686003AEF53 /* CoreDataStack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDataStack.framework; path = WebServiceKit/CoreDataStack.framework; sourceTree = "<group>"; };
 		26533D0E1FD1828F004DBFB4 /* XImageViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XImageViewRouter.swift; sourceTree = "<group>"; };
 		26A1E4371FC82EB2003F069E /* XImageViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XImageViewerController.swift; sourceTree = "<group>"; };
-		26A1E4391FC838C9003F069E /* bikini.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = bikini.plist; sourceTree = "<group>"; };
 		26A1E43D1FC83B43003F069E /* DownloadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadCell.swift; sourceTree = "<group>"; };
 		26A1E43F1FC8A730003F069E /* ZoomableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableImageView.swift; sourceTree = "<group>"; };
 		26AE8B121FC03874007F3A52 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
@@ -293,7 +291,6 @@
 		26A1E43B1FC83A68003F069E /* dataFiles */ = {
 			isa = PBXGroup;
 			children = (
-				26A1E4391FC838C9003F069E /* bikini.plist */,
 				260A1FA01FBF58520052C507 /* wallpaper.plist */,
 			);
 			path = dataFiles;
@@ -419,7 +416,6 @@
 				260A1F921FBF568B0052C507 /* LaunchScreen.storyboard in Resources */,
 				260A1F8F1FBF568B0052C507 /* Assets.xcassets in Resources */,
 				260A1FA21FBF58530052C507 /* wallpaper.plist in Resources */,
-				26A1E43A1FC838C9003F069E /* bikini.plist in Resources */,
 				260A1F8D1FBF568B0052C507 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

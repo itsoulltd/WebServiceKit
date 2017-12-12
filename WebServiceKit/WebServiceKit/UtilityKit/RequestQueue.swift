@@ -28,6 +28,7 @@ public protocol ProgressListener{
 /// 👉 Don't use use PersistableSynchronizer(or any subclass) from background thread.
 /// this class is not thread safe. Calling from other then Main Thread might causes crash.
 @objc(DownloadQueue)
+@objcMembers
 open class DownloadQueue: SavableRequestQueue {
     
     fileprivate override func execute() {
@@ -57,6 +58,7 @@ open class DownloadQueue: SavableRequestQueue {
 /// 👉 Don't use PersistableSynchronizer(or any subclass) from background thread.
 /// this class is not thread safe. Calling from other then Main Thread might causes crash.
 @objc(UploadQueue)
+@objcMembers
 open class UploadQueue: SavableRequestQueue {
     
     fileprivate override func execute() {
@@ -92,6 +94,7 @@ open class UploadQueue: SavableRequestQueue {
 /// 👉 Don't use PersistableSynchronizer(or any subclass) from background thread.
 /// this class is not thread safe. Calling from other then Main Thread might causes crash.
 @objc(UploadOnceQueue)
+@objcMembers
 open class UploadOnceQueue: UploadQueue {
     
     fileprivate var backgroundModeActivated = false
@@ -205,6 +208,7 @@ open class ContentDelegateImpl: NGObject, ContentDelegate {
 }
 
 @objc(RequestQueueConfiguration)
+@objcMembers
 open class RequestQueueConfiguration: NGObject {
     //Hello I do not Have Properties 😜, but have keys
     public struct Keys {
@@ -285,6 +289,7 @@ public protocol RequestQueue{
 }
 
 @objc(BaseRequestQueue)
+@objcMembers
 open class BaseRequestQueue: NSObject, RequestQueue {
     
     /***************************************THIS IS A GRAY AREA********************************************/
@@ -524,6 +529,7 @@ open class BaseRequestQueue: NSObject, RequestQueue {
 /// 👉 Don't use use PersistableSynchronizer(or any subclass) from background thread.
 /// this class is not thread safe. Calling from other then Main Thread might causes crash.
 @objc(SavableRequestQueue)
+@objcMembers
 open class SavableRequestQueue: BaseRequestQueue {
     
     fileprivate var identifier: String!

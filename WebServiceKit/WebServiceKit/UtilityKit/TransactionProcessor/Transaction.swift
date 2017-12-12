@@ -10,6 +10,8 @@ import Foundation
 import CoreDataStack
 import CoreNetworkStack
 
+@objc(Transaction)
+@objcMembers
 public class Transaction: NSObject, TransactionProcessingProtocol{
 
     public required init(request: HttpWebRequest, parserType: Response.Type, memoryHandler: ((_ previous: [String: AnyObject]) -> [String: AnyObject])? = nil) {
