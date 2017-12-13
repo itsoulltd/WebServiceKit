@@ -29,7 +29,7 @@ public protocol ProgressListener{
 /// this class is not thread safe. Calling from other then Main Thread might causes crash.
 @objc(DownloadQueue)
 @objcMembers
-open class DownloadQueue: SavableRequestQueue {
+public class DownloadQueue: SavableRequestQueue {
     
     fileprivate override func execute() {
         if !networkReachable{
@@ -59,7 +59,7 @@ open class DownloadQueue: SavableRequestQueue {
 /// this class is not thread safe. Calling from other then Main Thread might causes crash.
 @objc(UploadQueue)
 @objcMembers
-open class UploadQueue: SavableRequestQueue {
+public class UploadQueue: SavableRequestQueue {
     
     fileprivate override func execute() {
         if !networkReachable{
@@ -95,7 +95,7 @@ open class UploadQueue: SavableRequestQueue {
 /// this class is not thread safe. Calling from other then Main Thread might causes crash.
 @objc(UploadOnceQueue)
 @objcMembers
-open class UploadOnceQueue: UploadQueue {
+public class UploadOnceQueue: UploadQueue {
     
     fileprivate var backgroundModeActivated = false
     fileprivate var lastTracker: Tracker? {
@@ -229,14 +229,15 @@ open class RequestQueueConfiguration: NGObject {
 }
 
 @objc(Tracker)
-open class Tracker: NGObject {
+@objcMembers
+public class Tracker: NGObject {
     
-    var guid: NSString!
-    var orderIndex: NSNumber!
-    var request: HttpWebRequest?
-    var delegate: ContentDelegateImpl?
-    var maxTryCount: NSNumber = 1
-    var tryCount: NSNumber = 0
+    public var guid: NSString!
+    public var orderIndex: NSNumber!
+    public var request: HttpWebRequest?
+    fileprivate var delegate: ContentDelegateImpl?
+    public var maxTryCount: NSNumber = 1
+    public var tryCount: NSNumber = 0
     
     deinit{
         print("deinit :: \(self.description)")

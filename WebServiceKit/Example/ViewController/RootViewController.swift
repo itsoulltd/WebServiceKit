@@ -87,6 +87,8 @@ class RootViewController: UIViewController {
         }
         LocalNotificationCenter.stepUpBadgeNumber(forType: "DownloadAction")
         let downloadCap = HttpWebRequest(baseUrl: finalUrl)
+        //Its a bug, otherwise crash when reload Queue from filesystem.
+        downloadCap?.payLoad = NGObject()
         downloadPresenter.insertModel(forRequest: downloadCap, progress: nil)
     }
     
@@ -95,6 +97,8 @@ class RootViewController: UIViewController {
         if let url = getRandomUrl(){
             LocalNotificationCenter.stepUpBadgeNumber(forType: "DownloadAction")
             let downloadCap = HttpWebRequest(baseUrl: url)
+            //Its a bug, otherwise crash when reload Queue from filesystem.
+            downloadCap?.payLoad = NGObject()
             vcdownloader.enqueueRequest(downloadCap!)
         }
     }
@@ -104,6 +108,8 @@ class RootViewController: UIViewController {
         if let url = getRandomUrl(){
             LocalNotificationCenter.stepUpBadgeNumber(forType: "DownloadAction")
             let downloadCap = HttpWebRequest(baseUrl: url)
+            //Its a bug, otherwise crash when reload Queue from filesystem.
+            downloadCap?.payLoad = NGObject()
             downloadPresenter.insertModel(forRequest: downloadCap, progress: nil)
         }
     }
