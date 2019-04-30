@@ -52,6 +52,12 @@ open class TransactionProcessor: NSObject{
         stack.append(process)
     }
     
+    public final func reverse(){
+        if stack.count > 0 {
+            stack.reverse()
+        }
+    }
+    
     public final func start(){
         if let last = stack.last{
             self.delegate?.processingWillStart(self, forProcess: last)

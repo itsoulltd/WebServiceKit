@@ -26,7 +26,10 @@ open class TransactionStack: NSObject, TransactionProcessorDelegate {
         self.processor.push(process: process)
     }
     
-    open func commit(){
+    open func commit(reverse inOrder: Bool = false){
+        if inOrder {
+            self.processor.reverse()
+        }
         self.processor.start()
     }
     
