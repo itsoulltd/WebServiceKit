@@ -54,7 +54,15 @@ open class TransactionProcessor: NSObject{
     
     public final func reverse(){
         if stack.count > 0 {
-            stack.reverse()
+            var asIs = [TransactionProcessingProtocol]()
+            asIs.append(contentsOf: stack)
+            asIs.reverse()
+            stack.removeAll(keepingCapacity: true)
+            for transaction in asIs {
+                push(process: transaction)
+            }
+            stack[0].linkedProcess = nil //Caution! This is the terminating condition to break the loop:
+            asIs.removeAll(keepingCapacity: false)
         }
     }
     

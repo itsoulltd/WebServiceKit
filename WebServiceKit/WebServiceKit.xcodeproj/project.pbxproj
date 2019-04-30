@@ -35,8 +35,6 @@
 		260A1FA21FBF58530052C507 /* wallpaper.plist in Resources */ = {isa = PBXBuildFile; fileRef = 260A1FA01FBF58520052C507 /* wallpaper.plist */; };
 		260A1FA61FBF58B20052C507 /* LocalNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260A1FA41FBF58B20052C507 /* LocalNotificationCenter.swift */; };
 		260A1FA71FBF58B20052C507 /* NTMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260A1FA51FBF58B20052C507 /* NTMonitor.swift */; };
-		2632D3E61FC0848700D8A216 /* FileSystemSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2632D3E41FC0847300D8A216 /* FileSystemSDK.framework */; };
-		2632D3E71FC0848700D8A216 /* FileSystemSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2632D3E41FC0847300D8A216 /* FileSystemSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26456F021F766613003AEF53 /* WebServiceKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 26456F001F766613003AEF53 /* WebServiceKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26456F171F766686003AEF53 /* CoreNetworkStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26456F151F766686003AEF53 /* CoreNetworkStack.framework */; };
 		26456F181F766686003AEF53 /* CoreDataStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26456F161F766686003AEF53 /* CoreDataStack.framework */; };
@@ -57,6 +55,8 @@
 		26AF4AEC1FD12C7600A5FF26 /* DownloadTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF4AEB1FD12C7600A5FF26 /* DownloadTableView.swift */; };
 		26AF4AEE1FD12CA100A5FF26 /* DownloadPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF4AED1FD12CA100A5FF26 /* DownloadPresenter.swift */; };
 		26AF4AF11FD149F900A5FF26 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF4AF01FD149F900A5FF26 /* Router.swift */; };
+		8F2E02D522785272001523B6 /* FileSystemSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2632D3E41FC0847300D8A216 /* FileSystemSDK.framework */; };
+		8F2E02D622785272001523B6 /* FileSystemSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2632D3E41FC0847300D8A216 /* FileSystemSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +78,7 @@
 			files = (
 				260A1F9C1FBF56AB0052C507 /* CoreDataStack.framework in Embed Frameworks */,
 				260A1F981FBF56AB0052C507 /* WebServiceKit.framework in Embed Frameworks */,
-				2632D3E71FC0848700D8A216 /* FileSystemSDK.framework in Embed Frameworks */,
+				8F2E02D622785272001523B6 /* FileSystemSDK.framework in Embed Frameworks */,
 				260A1F9E1FBF56AB0052C507 /* CoreNetworkStack.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -97,7 +97,7 @@
 		260A1FA01FBF58520052C507 /* wallpaper.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = wallpaper.plist; sourceTree = "<group>"; };
 		260A1FA41FBF58B20052C507 /* LocalNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationCenter.swift; sourceTree = "<group>"; };
 		260A1FA51FBF58B20052C507 /* NTMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMonitor.swift; sourceTree = "<group>"; };
-		2632D3E41FC0847300D8A216 /* FileSystemSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FileSystemSDK.framework; sourceTree = "<group>"; };
+		2632D3E41FC0847300D8A216 /* FileSystemSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FileSystemSDK.framework; path = libs/FileSystemSDK.framework; sourceTree = "<group>"; };
 		26456EFD1F766613003AEF53 /* WebServiceKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WebServiceKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26456F001F766613003AEF53 /* WebServiceKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebServiceKit.h; sourceTree = "<group>"; };
 		26456F011F766613003AEF53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 			files = (
 				260A1F9B1FBF56AB0052C507 /* CoreDataStack.framework in Frameworks */,
 				260A1F971FBF56AB0052C507 /* WebServiceKit.framework in Frameworks */,
-				2632D3E61FC0848700D8A216 /* FileSystemSDK.framework in Frameworks */,
+				8F2E02D522785272001523B6 /* FileSystemSDK.framework in Frameworks */,
 				260A1F9D1FBF56AB0052C507 /* CoreNetworkStack.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,7 +285,7 @@
 			children = (
 				2632D3E41FC0847300D8A216 /* FileSystemSDK.framework */,
 			);
-			path = libs;
+			name = libs;
 			sourceTree = "<group>";
 		};
 		26A1E43B1FC83A68003F069E /* dataFiles */ = {
@@ -517,7 +517,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M622GQ77LE;
+				DEVELOPMENT_TEAM = YS4F7VX5G2;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -527,7 +527,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Resource/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.swift.Example;
+				PRODUCT_BUNDLE_IDENTIFIER = com.swift.wskit.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -540,7 +540,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M622GQ77LE;
+				DEVELOPMENT_TEAM = YS4F7VX5G2;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -550,7 +550,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Resource/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.swift.Example;
+				PRODUCT_BUNDLE_IDENTIFIER = com.swift.wskit.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
