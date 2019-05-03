@@ -28,10 +28,12 @@ open class Response: NGObject {
     }
     
     public var id: NSObject = UUID().uuidString as NSObject
-    public var failed: Bool{
-        return (code.rawValue == HttpStatusCode.ok.rawValue || code.rawValue == HttpStatusCode.created.rawValue) ? true : false
+    public var succeed: Bool{
+        return (code.rawValue == HttpStatusCode.ok.rawValue || code.rawValue == HttpStatusCode.created.rawValue)
+            ? true
+            : false
     }
-    public var code: HttpStatusCode = HttpStatusCode.notFound {
+    public var code: HttpStatusCode = HttpStatusCode.ok {
         didSet{
             if code.rawValue == HttpStatusCode.unauthorized.rawValue  {
                 NotificationCenter.default.post(name: Response.HttpStatusUnauthorizedAccessNotification, object: nil)

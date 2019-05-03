@@ -10,7 +10,6 @@ import Foundation
 
 @objc(HttpStatusCode)
 public enum HttpStatusCode: Int {
-    
     case ok = 200
     case created = 201
     case badRequest = 400
