@@ -85,7 +85,7 @@ class RootViewController: UIViewController {
                 finalUrl = "http://\(hitUrl)"
             }
         }
-        LocalNotificationCenter.stepUpBadgeNumber(forType: "DownloadAction")
+        NTLocalNotificationCenter.stepUpBadgeNumber(forType: "DownloadAction")
         let downloadCap = HttpWebRequest(baseUrl: finalUrl)
         //Its a bug, otherwise crash when reload Queue from filesystem.
         downloadCap?.payLoad = NGObject()
@@ -95,7 +95,7 @@ class RootViewController: UIViewController {
     @IBAction func proactiveAction(sender: UIButton) {
         //
         if let url = getRandomUrl(){
-            LocalNotificationCenter.stepUpBadgeNumber(forType: "DownloadAction")
+            NTLocalNotificationCenter.stepUpBadgeNumber(forType: "DownloadAction")
             let downloadCap = HttpWebRequest(baseUrl: url)
             //Its a bug, otherwise crash when reload Queue from filesystem.
             downloadCap?.payLoad = NGObject()
@@ -106,7 +106,7 @@ class RootViewController: UIViewController {
     @IBAction func reactiveAction(sender: UIButton) {
         //
         if let url = getRandomUrl(){
-            LocalNotificationCenter.stepUpBadgeNumber(forType: "DownloadAction")
+            NTLocalNotificationCenter.stepUpBadgeNumber(forType: "DownloadAction")
             let downloadCap = HttpWebRequest(baseUrl: url)
             //Its a bug, otherwise crash when reload Queue from filesystem.
             downloadCap?.payLoad = NGObject()

@@ -13,11 +13,11 @@ import CoreNetworkStack
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var badgeCounter = LocalNotificationCenter.resolveLocalNotification(ofType: "DownloadAction")
+    var badgeCounter = NTLocalNotificationCenter.resolveLocalNotification(ofType: "DownloadAction")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         //Local Notification
-        LocalNotificationCenter.registerLocalNotification(application: application, launchOptions: launchOptions )
+        NTLocalNotificationCenter.registerLocalNotification(application: application, launchOptions: launchOptions )
         NetworkActivity.sharedInstance().activateReachabilityObserver(withHostAddress: "www.google.com")
         return true
     }

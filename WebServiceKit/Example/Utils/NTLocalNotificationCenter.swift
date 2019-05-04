@@ -9,7 +9,7 @@
 import UIKit
 import CoreDataStack
 
-public class LocalNotificationCenter: NSObject {
+public class NTLocalNotificationCenter: NSObject {
     
     private struct localSharedObjects{
         static var objectCache: NSMutableDictionary = NSMutableDictionary()
@@ -49,7 +49,7 @@ public class LocalNotificationCenter: NSObject {
             return cached
         }
         else{
-            let newlyCreated = LocalNotificationCenter.initLocalNotification(ofType: type)
+            let newlyCreated = NTLocalNotificationCenter.initLocalNotification(ofType: type)
             localSharedObjects.objectCache.setObject(newlyCreated, forKey: type as NSCopying)
             return newlyCreated
         }
@@ -67,29 +67,29 @@ public class LocalNotificationCenter: NSObject {
     }
     
     class func clearBadgeNumber(forType type: String, application: UIApplication){
-        let cache = LocalNotificationCenter.resolveLocalNotification(ofType: type)
+        let cache = NTLocalNotificationCenter.resolveLocalNotification(ofType: type)
         cache.clearBadgeNumber(application: application)
     }
     
     class func handleLocalNotification(notification: UILocalNotification, application: UIApplication, completionHandler: ((_ type: String, _ badgeNumber: Int) -> Void)? = nil){
         //
         if (notification.alertAction != nil){
-            let cache = LocalNotificationCenter.resolveLocalNotification(ofType: notification.alertAction!)
+            let cache = NTLocalNotificationCenter.resolveLocalNotification(ofType: notification.alertAction!)
             cache.handleLocalNotification(notification: notification, application: application, completionHandler: completionHandler)
         }
     }
     
     class func stepUpBadgeNumber(forType type: String, message: String? = nil){
-        let cache = LocalNotificationCenter.resolveLocalNotification(ofType: type)
+        let cache = NTLocalNotificationCenter.resolveLocalNotification(ofType: type)
         cache.stepUpBadgeNumber(message: message)
     }
     
     class func stepDownBadgeNumber(forType type: String, message: String? = nil){
-        let cache = LocalNotificationCenter.resolveLocalNotification(ofType: type)
+        let cache = NTLocalNotificationCenter.resolveLocalNotification(ofType: type)
         cache.stepDownBadgeNumber(message: message)
     }
     
-    fileprivate class func scheduleNotification(actionType: String,message: String? = nil, counter: Int){
+    public class func scheduleNotification(actionType: String,message: String? = nil, counter: Int){
         //
         if SharedMonitor.monitor.shouldFire(type: actionType, nowDate: NSDate()){
             let local = UILocalNotification()
@@ -103,54 +103,5 @@ public class LocalNotificationCenter: NSObject {
         }
     }
    
-}
-
-public class NTLocalNotification: NGObject{
-    
-    private var actionType: NSString!
-    var ActionType: String {
-        return actionType as String
-    }
-    private var badgeNumber: NSNumber = 0
-    
-    init(actionType: String) {
-        super.init()
-        self.actionType = actionType as NSString
-    }
-
-    required public init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
-    }
-    
-    func clearBadgeNumber(application: UIApplication){
-        //
-        if badgeNumber == 0{
-            application.applicationIconBadgeNumber = badgeNumber.intValue
-        }
-    }
-    
-    func handleLocalNotification(notification: UILocalNotification, application: UIApplication, completionHandler: ((_ type: String, _ badgeNumber: Int) -> Void)? = nil){
-        //
-        if notification.alertAction! == ActionType{
-            application.applicationIconBadgeNumber = badgeNumber.intValue
-            if let handler = completionHandler{
-                handler(ActionType, badgeNumber.intValue)
-            }
-        }
-    }
-    
-    func stepUpBadgeNumber(message: String? = nil){
-        var number = badgeNumber.intValue
-        number += 1
-        badgeNumber = NSNumber(value: number)
-        LocalNotificationCenter.scheduleNotification(actionType: ActionType, message: message, counter: badgeNumber.intValue)
-    }
-    
-    func stepDownBadgeNumber(message: String? = nil){
-        var number = badgeNumber.intValue
-        number -= 1
-        badgeNumber = NSNumber(value: number)
-        LocalNotificationCenter.scheduleNotification(actionType: actionType as String, message: message, counter: badgeNumber.intValue)
-    }
 }
 

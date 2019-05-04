@@ -72,7 +72,7 @@ extension DownloadPresenter: RequestQueueDelegate{
         if let model: DownloadModel = findModelFor(request: forRequest){
             model.savedUrl = savePath
         }
-        LocalNotificationCenter.stepDownBadgeNumber(forType: "DownloadAction", message: "Download Complete")
+        NTLocalNotificationCenter.stepDownBadgeNumber(forType: "DownloadAction", message: "Download Complete")
     }
     
     //MARK: GenericSynchDelegate

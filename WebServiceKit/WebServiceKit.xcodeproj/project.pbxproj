@@ -33,7 +33,7 @@
 		260A1F9D1FBF56AB0052C507 /* CoreNetworkStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26456F151F766686003AEF53 /* CoreNetworkStack.framework */; };
 		260A1F9E1FBF56AB0052C507 /* CoreNetworkStack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26456F151F766686003AEF53 /* CoreNetworkStack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		260A1FA21FBF58530052C507 /* wallpaper.plist in Resources */ = {isa = PBXBuildFile; fileRef = 260A1FA01FBF58520052C507 /* wallpaper.plist */; };
-		260A1FA61FBF58B20052C507 /* LocalNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260A1FA41FBF58B20052C507 /* LocalNotificationCenter.swift */; };
+		260A1FA61FBF58B20052C507 /* NTLocalNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260A1FA41FBF58B20052C507 /* NTLocalNotificationCenter.swift */; };
 		260A1FA71FBF58B20052C507 /* NTMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260A1FA51FBF58B20052C507 /* NTMonitor.swift */; };
 		26456F021F766613003AEF53 /* WebServiceKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 26456F001F766613003AEF53 /* WebServiceKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26456F171F766686003AEF53 /* CoreNetworkStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26456F151F766686003AEF53 /* CoreNetworkStack.framework */; };
@@ -55,6 +55,7 @@
 		26AF4AEC1FD12C7600A5FF26 /* DownloadTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF4AEB1FD12C7600A5FF26 /* DownloadTableView.swift */; };
 		26AF4AEE1FD12CA100A5FF26 /* DownloadPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF4AED1FD12CA100A5FF26 /* DownloadPresenter.swift */; };
 		26AF4AF11FD149F900A5FF26 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF4AF01FD149F900A5FF26 /* Router.swift */; };
+		8F207BB5227D737B00CCB066 /* NTLocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F207BB4227D737B00CCB066 /* NTLocalNotification.swift */; };
 		8F2E02D522785272001523B6 /* FileSystemSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2632D3E41FC0847300D8A216 /* FileSystemSDK.framework */; };
 		8F2E02D622785272001523B6 /* FileSystemSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2632D3E41FC0847300D8A216 /* FileSystemSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -95,7 +96,7 @@
 		260A1F911FBF568B0052C507 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		260A1F931FBF568B0052C507 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		260A1FA01FBF58520052C507 /* wallpaper.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = wallpaper.plist; sourceTree = "<group>"; };
-		260A1FA41FBF58B20052C507 /* LocalNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationCenter.swift; sourceTree = "<group>"; };
+		260A1FA41FBF58B20052C507 /* NTLocalNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTLocalNotificationCenter.swift; sourceTree = "<group>"; };
 		260A1FA51FBF58B20052C507 /* NTMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMonitor.swift; sourceTree = "<group>"; };
 		2632D3E41FC0847300D8A216 /* FileSystemSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FileSystemSDK.framework; path = libs/FileSystemSDK.framework; sourceTree = "<group>"; };
 		26456EFD1F766613003AEF53 /* WebServiceKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WebServiceKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +121,7 @@
 		26AF4AEB1FD12C7600A5FF26 /* DownloadTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadTableView.swift; sourceTree = "<group>"; };
 		26AF4AED1FD12CA100A5FF26 /* DownloadPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadPresenter.swift; sourceTree = "<group>"; };
 		26AF4AF01FD149F900A5FF26 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		8F207BB4227D737B00CCB066 /* NTLocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTLocalNotification.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,7 +264,8 @@
 		265A06021FC084170004FF93 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				260A1FA41FBF58B20052C507 /* LocalNotificationCenter.swift */,
+				260A1FA41FBF58B20052C507 /* NTLocalNotificationCenter.swift */,
+				8F207BB4227D737B00CCB066 /* NTLocalNotification.swift */,
 				260A1FA51FBF58B20052C507 /* NTMonitor.swift */,
 				26AE8B121FC03874007F3A52 /* Utility.swift */,
 			);
@@ -455,6 +458,7 @@
 				26533D0F1FD1828F004DBFB4 /* XImageViewRouter.swift in Sources */,
 				260A1F8A1FBF568B0052C507 /* RootViewController.swift in Sources */,
 				260A1F881FBF568B0052C507 /* AppDelegate.swift in Sources */,
+				8F207BB5227D737B00CCB066 /* NTLocalNotification.swift in Sources */,
 				26AE8B131FC03874007F3A52 /* Utility.swift in Sources */,
 				260A1FA71FBF58B20052C507 /* NTMonitor.swift in Sources */,
 				26AF4AE81FD1241900A5FF26 /* XImageView.swift in Sources */,
@@ -462,7 +466,7 @@
 				26A1E4381FC82EB2003F069E /* XImageViewerController.swift in Sources */,
 				26AF4AEC1FD12C7600A5FF26 /* DownloadTableView.swift in Sources */,
 				26AF4AEE1FD12CA100A5FF26 /* DownloadPresenter.swift in Sources */,
-				260A1FA61FBF58B20052C507 /* LocalNotificationCenter.swift in Sources */,
+				260A1FA61FBF58B20052C507 /* NTLocalNotificationCenter.swift in Sources */,
 				26AF4AF11FD149F900A5FF26 /* Router.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

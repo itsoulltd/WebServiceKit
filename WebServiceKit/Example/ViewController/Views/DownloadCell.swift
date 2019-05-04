@@ -74,7 +74,7 @@ class DownloadCell: UITableViewCell {
         //
         if let model = self.model{
             downloader.cancelRequest(model.request!)
-            LocalNotificationCenter.stepDownBadgeNumber(forType: "DownloadAction", message: "Download Cancel")
+            NTLocalNotificationCenter.stepDownBadgeNumber(forType: "DownloadAction", message: "Download Cancel")
         }
     }
 }
