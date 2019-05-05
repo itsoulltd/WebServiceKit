@@ -27,7 +27,7 @@ open class Response: NGObject {
         super.init(coder: aDecoder)
     }
     
-    public var id: NSObject = UUID().uuidString as NSObject
+    public var uuid: NSObject = UUID().uuidString as NSObject
     public var succeed: Bool{
         return (code.rawValue == HttpStatusCode.ok.rawValue || code.rawValue == HttpStatusCode.created.rawValue)
             ? true
