@@ -77,6 +77,7 @@ open class TransactionProcessor: NSObject{
                     return
                 }
                 else if (next == nil){
+                    self.stack.removeLast()
                     self.delegate?.processingDidFinished(self, finalResponse: previousResponse)
                     return
                 }
