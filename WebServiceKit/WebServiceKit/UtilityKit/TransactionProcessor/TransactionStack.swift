@@ -9,6 +9,10 @@ import UIKit
 import CoreDataStack
 import CoreNetworkStack
 
+public enum TransactionStackState: Int{
+    case None, Running, Finished, Failed, Canceled
+}
+
 @objc(TransactionStack)
 @objcMembers
 open class TransactionStack: NSObject, TransactionProcessorDelegate {
@@ -16,28 +20,51 @@ open class TransactionStack: NSObject, TransactionProcessorDelegate {
     fileprivate var processor: TransactionProcessor!
     fileprivate var callBack: ((_ received: [NGObjectProtocol]?) -> Void)?
     
-    required public init(callBack: ((_ received: [NGObjectProtocol]?) -> Void)?) {
+    private var _status: TransactionStackState = .None
+    public var status: TransactionStackState{
+        get{
+            return _status
+        }
+    }
+    
+    public required override init() {
         super.init()
-        self.callBack = callBack
         self.processor = TransactionProcessor(delegate: self, errorResponse: Response.self)
     }
     
+    public convenience init(callBack: ((_ received: [NGObjectProtocol]?) -> Void)?) {
+        self.init()
+        self.callBack = callBack
+    }
+    
     open func push(_ process: TransactionProcessingProtocol){
+        if status == .Running {
+            return
+        }
         self.processor.push(process: process)
     }
     
-    open func commit(reverse inOrder: Bool = false){
+    open func commit(reverse inOrder: Bool = false, callBack: ((_ received: [NGObjectProtocol]?) -> Void)? = nil){
+        if status == .Running {
+            return
+        }
+        self.callBack = callBack
         if inOrder {
             self.processor.reverse()
         }
+        _status = .Running
         self.processor.start()
     }
     
     open func cancel() {
-        self.processor.abort()
+        if status == .Running {
+            _status = .Canceled
+            self.processor.abort()
+        }
     }
     
     open func processingDidFinished(_ processor: TransactionProcessor, finalResponse: [NGObjectProtocol]?) {
+        _status = .Finished
         guard let callBack = self.callBack else{
             return
         }
@@ -45,6 +72,7 @@ open class TransactionStack: NSObject, TransactionProcessorDelegate {
     }
     
     open func processingDidFailed(_ processor: TransactionProcessor, failedResponse: NGObjectProtocol) {
+        _status = .Failed
         guard let callBack = self.callBack else{
             return
         }
