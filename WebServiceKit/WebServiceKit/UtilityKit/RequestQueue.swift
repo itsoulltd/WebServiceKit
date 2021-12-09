@@ -46,7 +46,7 @@ public class DownloadQueue: SavableRequestQueue {
                 let task = session.downloadContent(tracker.request, progressDelegate: tracker.delegate, onCompletion: { (url, response, error) -> Void in
                     NetworkActivity.sharedInstance().stop()
                     self.removeTask(tracker.request)
-                    self.onCompletion(url as AnyObject!, response: response, error: error as NSError!)
+                    self.onCompletion(url as AnyObject?, response: response, error: error as NSError?)
                 })
                 addTask(task!, forTracker: tracker)
             }
@@ -74,11 +74,11 @@ public class UploadQueue: SavableRequestQueue {
                 if tracker.request is HttpFileRequest{
                     reconstructProgressHandlerFor(tracker)
                     NetworkActivity.sharedInstance().start()
-                    let task = session.uploadContent(tracker.request as! HttpFileRequest, progressDelegate: tracker.delegate, onCompletion: { (data, response, error) -> Void in
+                    let task = session.uploadContent(tracker.request as? HttpFileRequest, progressDelegate: tracker.delegate, onCompletion: { (data, response, error) -> Void in
                         //
                         NetworkActivity.sharedInstance().stop()
                         self.removeTask(tracker.request)
-                        self.onCompletion(data as AnyObject!, response: response, error: error as NSError!)
+                        self.onCompletion(data as AnyObject?, response: response, error: error as NSError?)
                     })
                     addTask(task!, forTracker: tracker)
                 }
@@ -158,10 +158,10 @@ public class UploadOnceQueue: UploadQueue {
                 if tracker.request is HttpFileRequest{
                     reconstructProgressHandlerFor(tracker)
                     NetworkActivity.sharedInstance().start()
-                    let task = session.uploadContent(tracker.request as! HttpFileRequest, progressDelegate: tracker.delegate, onCompletion: { (data, response, error) -> Void in
+                    let task = session.uploadContent(tracker.request as? HttpFileRequest, progressDelegate: tracker.delegate, onCompletion: { (data, response, error) -> Void in
                         NetworkActivity.sharedInstance().stop()
                         self.removeTask(tracker.request)
-                        self.onCompletion(data as AnyObject!, response: response, error: error as NSError!)
+                        self.onCompletion(data as AnyObject?, response: response, error: error as NSError?)
                     })
                     addTask(task!, forTracker: tracker)
                 }
@@ -219,7 +219,7 @@ open class RequestQueueConfiguration: NGObject {
     public var identifier: NSString!
     
     public init(identifier: NSString, info: NSDictionary){
-        super.init(info: info as! [AnyHashable: Any])
+        super.init(info: info as? [AnyHashable: Any])
         self.identifier = identifier
     }
     
@@ -249,9 +249,9 @@ public class Tracker: NGObject {
                 let info: NSDictionary = (value as! NSDictionary)
                 let allKeys = info.allKeys as NSArray
                 if allKeys.contains("localFileURL"){
-                    request = HttpFileRequest(info: info as! [AnyHashable: Any])
+                    request = HttpFileRequest(info: info as? [AnyHashable: Any])
                 }else{
-                    request = HttpWebRequest(info: info as! [AnyHashable: Any])
+                    request = HttpWebRequest(info: info as? [AnyHashable: Any])
                 }
             }else{
                 super.updateValue(value, forKey: key)
@@ -269,7 +269,7 @@ public class Tracker: NGObject {
     }
     
     open override func serializeValue(_ value: Any!, forKey key: String!) -> Any! {
-        return super.serializeValue(value, forKey: key) as AnyObject!
+        return super.serializeValue(value, forKey: key) as AnyObject?
     }
     
     ///Ascending order
@@ -466,7 +466,7 @@ open class BaseRequestQueue: NSObject, RequestQueue {
                 let task = session.sendUtilityMessage(tracker.request, onCompletion: { (data, response, error) -> Void in
                     NetworkActivity.sharedInstance().stop()
                     self.removeTask(tracker.request)
-                    self.onCompletion(data as AnyObject!, response: response, error: error as NSError!)
+                    self.onCompletion(data as AnyObject?, response: response, error: error as NSError?)
                 })
                 addTask(task!, forTracker: tracker)
             }
@@ -511,7 +511,7 @@ open class BaseRequestQueue: NSObject, RequestQueue {
     }
     
     fileprivate func whenSucceed(_ data: AnyObject!){
-        print(data)
+        print(data!)
         //print("\(NSStringFromClass(type(of: self))) -> is running on \(String(cString: DISPATCH_CURRENT_QUEUE_LABEL.label))")
         if let tracker = self.runningQueue.dequeue() as? Tracker{
             if data is NSData{
@@ -541,11 +541,11 @@ open class SavableRequestQueue: BaseRequestQueue {
         super.init(configuration: configuration)
         self.identifier = configuration.identifier as String
         //
-        manager = PropertyList(fileName: "\(identifier)_synchronizer_queue", directoryType: FileManager.SearchPathDirectory.documentDirectory, dictionary: true)
-        if let order = manager.item(forKey: identifier as NSCopying!) as? NSNumber{
+        manager = PropertyList(fileName: "\(identifier!)_synchronizer_queue", directoryType: FileManager.SearchPathDirectory.documentDirectory, dictionary: true)
+        if let order = manager.item(forKey: identifier as NSCopying?) as? NSNumber{
             orderIndex = order.intValue
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(SavableRequestQueue.applicationDidEnterBackground(_:)), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SavableRequestQueue.applicationDidEnterBackground(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     public convenience init(configuration: RequestQueueConfiguration, remoteSession: RemoteSession){
@@ -554,7 +554,7 @@ open class SavableRequestQueue: BaseRequestQueue {
     }
     
     deinit{
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     @objc public func applicationDidEnterBackground(_ notification: Notification){
@@ -564,7 +564,7 @@ open class SavableRequestQueue: BaseRequestQueue {
     
     fileprivate override func enqueueTracker(_ capsul: HttpWebRequest) -> Tracker?{
         let tracker = Tracker()
-        tracker.guid = UUID().uuidString as NSString!
+        tracker.guid = UUID().uuidString as NSString?
         tracker.request = capsul
         if let maxCount = configuration.value(forKey: RequestQueueConfiguration.Keys.MaxTryCount) as? NSNumber{
             tracker.maxTryCount = maxCount
@@ -577,8 +577,8 @@ open class SavableRequestQueue: BaseRequestQueue {
     fileprivate func saveState(_ tracker: Tracker){
         orderIndex += 1
         let newIndex = orderIndex
-        tracker.orderIndex = newIndex as NSNumber!
-        manager.addItem(toCollection: NSNumber(value: newIndex as Int), forKey: identifier as NSCopying!)
+        tracker.orderIndex = newIndex as NSNumber?
+        manager.addItem(toCollection: NSNumber(value: newIndex as Int), forKey: identifier as NSCopying?)
         let archivedTracker = NSKeyedArchiver.archivedData(withRootObject: tracker)
         manager.addItem(toCollection: archivedTracker, forKey: tracker.guid)
     }
@@ -662,7 +662,7 @@ open class SavableRequestQueue: BaseRequestQueue {
                 let task = session.sendUtilityMessage(tracker.request, onCompletion: { (data, response, error) -> Void in
                     NetworkActivity.sharedInstance().stop()
                     self.removeTask(tracker.request)
-                    self.onCompletion(data as AnyObject!, response: response, error: error as NSError!)
+                    self.onCompletion(data as AnyObject?, response: response, error: error as NSError?)
                 })
                 addTask(task!, forTracker: tracker)
             }

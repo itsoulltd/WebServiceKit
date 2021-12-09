@@ -87,7 +87,7 @@ open class TransactionProcessor: NSObject{
                     self.start()
                 }
                 }, failed: { (abort, reason) -> Void in
-                    print(reason.serializeIntoInfo())
+                    print(reason.serializeIntoInfo() as Any)
                     if abort{
                         self.delegate?.processingDidFailed(self, failedResponse: reason)
                         return

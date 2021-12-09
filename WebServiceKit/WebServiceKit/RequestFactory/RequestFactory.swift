@@ -61,21 +61,21 @@ open class RequestMetadata: NGObject{
     open override func serializeValue(_ value: Any!, forKey key: String!) -> Any! {
         if key == "httpMethod"{
             if httpMethod == POST{
-                return "post" as AnyObject!
+                return "post" as AnyObject?
             }
             else{
-                return "get" as AnyObject!
+                return "get" as AnyObject?
             }
         }
         else if key == "contentType"{
             if contentType == Application_JSON{
-                return "json" as AnyObject!
+                return "json" as AnyObject?
             }
             else if contentType == Application_Multipart_FormData{
-                return "multipart" as AnyObject!
+                return "multipart" as AnyObject?
             }
             else {
-                return "urlencoded" as AnyObject!
+                return "urlencoded" as AnyObject?
             }
         }
         else if key == "pathParams"{
@@ -86,7 +86,7 @@ open class RequestMetadata: NGObject{
             }
         }
         else{
-            return super.serializeValue(value, forKey: key) as AnyObject!
+            return super.serializeValue(value, forKey: key) as AnyObject?
         }
     }
     
@@ -108,13 +108,13 @@ open class RequestFactory: NSObject{
     }
     
     public final func updateProperty(_ value: AnyObject, forKey key: String){
-        propertyList.addItem(toCollection: value, forKey: key as NSCopying!)
+        propertyList.addItem(toCollection: value, forKey: key as NSCopying?)
         print("Updated key : \(getProperty(forKey: key))")
         propertyList.saveBackground()
     }
     
     public final func getProperty(forKey key: String) -> AnyObject{
-        return propertyList.item(forKey: key as NSCopying!) as AnyObject
+        return propertyList.item(forKey: key as NSCopying?) as AnyObject
     }
     
     open func httpReferrerHeaderValue() -> [String]{
@@ -153,7 +153,7 @@ open class RequestFactory: NSObject{
     
     public final func metadata(forKey key: String) -> RequestMetadata?{
         if let meta = getProperty(forKey: key) as? NSDictionary{
-            let metadata = RequestMetadata(info: meta as! [AnyHashable: Any])
+            let metadata = RequestMetadata(info: meta as? [AnyHashable: Any])
             return metadata
         }
         return nil
