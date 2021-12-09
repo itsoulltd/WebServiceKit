@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var badgeCounter = NTLocalNotificationCenter.resolveLocalNotification(ofType: "DownloadAction")
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         //Local Notification
         NTLocalNotificationCenter.registerLocalNotification(application: application, launchOptions: launchOptions )
         NetworkActivity.sharedInstance().activateReachabilityObserver(withHostAddress: "www.google.com")

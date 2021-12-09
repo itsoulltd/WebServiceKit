@@ -15,7 +15,7 @@ public class NTLocalNotificationCenter: NSObject {
         static var objectCache: NSMutableDictionary = NSMutableDictionary()
     }
     
-    class func registerLocalNotification(application: UIApplication, launchOptions: [UIApplicationLaunchOptionsKey: Any]?){
+    class func registerLocalNotification(application: UIApplication, launchOptions: [UIApplication.LaunchOptionsKey: Any]?){
         //
         if #available(iOS 8.0, *) {
             application.registerUserNotificationSettings(UIUserNotificationSettings(types: [UIUserNotificationType.sound, UIUserNotificationType.alert, UIUserNotificationType.badge], categories: nil))
@@ -26,7 +26,7 @@ public class NTLocalNotificationCenter: NSObject {
             // Fallback on earlier versions
         }
         if let launchOpt = launchOptions as NSDictionary?{
-            if let _ = launchOpt.object(forKey: UIApplicationLaunchOptionsKey.localNotification) as? UILocalNotification {
+            if let _ = launchOpt.object(forKey: UIApplication.LaunchOptionsKey.localNotification) as? UILocalNotification {
                 application.applicationIconBadgeNumber = 0
             }
         }

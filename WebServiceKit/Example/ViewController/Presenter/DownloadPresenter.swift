@@ -94,7 +94,7 @@ extension DownloadPresenter: RequestQueueDelegate{
     }
     
     func downloadSucceed(_ forRequest: HttpWebRequest?, saveUrl: URL) {
-        let fileName = (forRequest?.baseUrl as NSString!).lastPathComponent
+        let fileName = (forRequest?.baseUrl as NSString?)!.lastPathComponent
         let readFile = File(url: saveUrl)
         let imagesFolder = Folder(name: "Images", searchDirectoryType: FileManager.SearchPathDirectory.cachesDirectory)
         let writePath = imagesFolder.path()?.appendingPathComponent(fileName)

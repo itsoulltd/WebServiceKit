@@ -52,7 +52,7 @@ class DownloadCell: UITableViewCell {
     func updateDisplay(model: DownloadModel){
         //
         self.model = model
-        pathLabel.text = (model.request?.baseUrl as NSString!).lastPathComponent
+        pathLabel.text = (model.request?.baseUrl as NSString?)!.lastPathComponent
         if model.savedUrl == nil{
             progressBar.progress = 0.0
             if model.progress == nil{

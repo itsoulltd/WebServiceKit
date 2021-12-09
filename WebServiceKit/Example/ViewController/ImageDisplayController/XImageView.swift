@@ -17,7 +17,7 @@ class XImageView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         //
-        let spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        let spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
         spinner.color = UIColor.red
         spinner.hidesWhenStopped = true
         self.addSubview(spinner)

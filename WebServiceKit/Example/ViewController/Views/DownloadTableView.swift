@@ -40,7 +40,7 @@ extension DownloadTableView: UITableViewDataSource, UITableViewDelegate {
         let model = presenter.dataSource[indexPath.row]
         cell.downloader = presenter.downloader
         cell.updateDisplay(model: model)
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         return cell
     }
     
@@ -100,23 +100,23 @@ extension DownloadTableView: UITableViewDataSource, UITableViewDelegate {
         return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         //
     }
     
     @available(iOS 8.0, *)
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let cancel = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Cancel") { (action: UITableViewRowAction, indexPath: IndexPath) -> Void in
+        let cancel = UITableViewRowAction(style: UITableViewRowAction.Style.default, title: "Cancel") { (action: UITableViewRowAction, indexPath: IndexPath) -> Void in
             let cell = tableView.cellForRow(at: indexPath) as! DownloadCell
             cell.cancelAction(sender: nil)
         }
         cancel.backgroundColor = UIColor.hex("#1abc9c")
         
-        let delete = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Delete") { (action: UITableViewRowAction, indexPath: IndexPath) -> Void in
+        let delete = UITableViewRowAction(style: UITableViewRowAction.Style.default, title: "Delete") { (action: UITableViewRowAction, indexPath: IndexPath) -> Void in
             let cell = tableView.cellForRow(at: indexPath) as! DownloadCell
             cell.cancelAction(sender: nil)
             self.presenter.deleteModel(indexPath)
-            tableView.deleteRows(at: [IndexPath(row: indexPath.row, section: indexPath.section)], with: UITableViewRowAnimation.automatic)
+            tableView.deleteRows(at: [IndexPath(row: indexPath.row, section: indexPath.section)], with: UITableView.RowAnimation.automatic)
         }
         delete.backgroundColor = UIColor.orange
         

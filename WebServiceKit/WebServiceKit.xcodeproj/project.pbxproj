@@ -56,8 +56,8 @@
 		26AF4AEE1FD12CA100A5FF26 /* DownloadPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF4AED1FD12CA100A5FF26 /* DownloadPresenter.swift */; };
 		26AF4AF11FD149F900A5FF26 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF4AF01FD149F900A5FF26 /* Router.swift */; };
 		8F207BB5227D737B00CCB066 /* NTLocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F207BB4227D737B00CCB066 /* NTLocalNotification.swift */; };
-		8F2E02D522785272001523B6 /* FileSystemSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2632D3E41FC0847300D8A216 /* FileSystemSDK.framework */; };
-		8F2E02D622785272001523B6 /* FileSystemSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2632D3E41FC0847300D8A216 /* FileSystemSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8F4393172761F3DA00F76253 /* FileSystemSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2632D3E41FC0847300D8A216 /* FileSystemSDK.framework */; };
+		8F4393182761F3DA00F76253 /* FileSystemSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2632D3E41FC0847300D8A216 /* FileSystemSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +79,7 @@
 			files = (
 				260A1F9C1FBF56AB0052C507 /* CoreDataStack.framework in Embed Frameworks */,
 				260A1F981FBF56AB0052C507 /* WebServiceKit.framework in Embed Frameworks */,
-				8F2E02D622785272001523B6 /* FileSystemSDK.framework in Embed Frameworks */,
+				8F4393182761F3DA00F76253 /* FileSystemSDK.framework in Embed Frameworks */,
 				260A1F9E1FBF56AB0052C507 /* CoreNetworkStack.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -131,7 +131,7 @@
 			files = (
 				260A1F9B1FBF56AB0052C507 /* CoreDataStack.framework in Frameworks */,
 				260A1F971FBF56AB0052C507 /* WebServiceKit.framework in Frameworks */,
-				8F2E02D522785272001523B6 /* FileSystemSDK.framework in Frameworks */,
+				8F4393172761F3DA00F76253 /* FileSystemSDK.framework in Frameworks */,
 				260A1F9D1FBF56AB0052C507 /* CoreNetworkStack.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,6 +379,7 @@
 				TargetAttributes = {
 					260A1F841FBF568B0052C507 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 					};
 					26456EFC1F766613003AEF53 = {
@@ -534,7 +535,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.swift.wskit.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -557,7 +558,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.swift.wskit.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
