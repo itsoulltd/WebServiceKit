@@ -98,17 +98,19 @@ public class UploadQueue: SavableRequestQueue {
 public class UploadOnceQueue: UploadQueue {
     
     fileprivate var backgroundModeActivated = false
+    fileprivate var _lastTracker: Tracker?
     fileprivate var lastTracker: Tracker? {
         get{
             guard let unarchived = UserDefaults.standard.object(forKey: "CurrentTrackerKey") as? Data else{
                 return nil
             }
-            let tracker = NSKeyedUnarchiver.unarchiveObject(with: unarchived) as? Tracker
-            return tracker
+            _lastTracker = NSKeyedUnarchiver.unarchiveObject(with: unarchived) as? Tracker
+            return _lastTracker
         }
+        //
         set{
-            self.lastTracker = newValue
-            if let nValue = newValue{
+            _lastTracker = newValue
+            if let nValue = _lastTracker {
                 let archived = NSKeyedArchiver.archivedData(withRootObject: nValue)
                 UserDefaults.standard.set(archived, forKey: "CurrentTrackerKey")
                 //NSUserDefaults.standardUserDefaults().synchronize()
