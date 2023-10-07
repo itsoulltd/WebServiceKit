@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		268C51562AD184C700CE5482 /* Aggregator-v2 */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 268C51572AD184C700CE5482 /* Build configuration list for PBXAggregateTarget "Aggregator-v2" */;
+			buildPhases = (
+				268C515A2AD184DD00CE5482 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "Aggregator-v2";
+			productName = "Aggregator-v2";
+		};
 		26A1E4321FC80A89003F069E /* Aggregator */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 26A1E4331FC80A89003F069E /* Build configuration list for PBXAggregateTarget "Aggregator" */;
@@ -28,16 +39,10 @@
 		260A1F921FBF568B0052C507 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 260A1F901FBF568B0052C507 /* LaunchScreen.storyboard */; };
 		260A1F971FBF56AB0052C507 /* WebServiceKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26456EFD1F766613003AEF53 /* WebServiceKit.framework */; };
 		260A1F981FBF56AB0052C507 /* WebServiceKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26456EFD1F766613003AEF53 /* WebServiceKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		260A1F9B1FBF56AB0052C507 /* CoreDataStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26456F161F766686003AEF53 /* CoreDataStack.framework */; };
-		260A1F9C1FBF56AB0052C507 /* CoreDataStack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26456F161F766686003AEF53 /* CoreDataStack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		260A1F9D1FBF56AB0052C507 /* CoreNetworkStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26456F151F766686003AEF53 /* CoreNetworkStack.framework */; };
-		260A1F9E1FBF56AB0052C507 /* CoreNetworkStack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26456F151F766686003AEF53 /* CoreNetworkStack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		260A1FA21FBF58530052C507 /* wallpaper.plist in Resources */ = {isa = PBXBuildFile; fileRef = 260A1FA01FBF58520052C507 /* wallpaper.plist */; };
 		260A1FA61FBF58B20052C507 /* NTLocalNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260A1FA41FBF58B20052C507 /* NTLocalNotificationCenter.swift */; };
 		260A1FA71FBF58B20052C507 /* NTMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260A1FA51FBF58B20052C507 /* NTMonitor.swift */; };
 		26456F021F766613003AEF53 /* WebServiceKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 26456F001F766613003AEF53 /* WebServiceKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		26456F171F766686003AEF53 /* CoreNetworkStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26456F151F766686003AEF53 /* CoreNetworkStack.framework */; };
-		26456F181F766686003AEF53 /* CoreDataStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26456F161F766686003AEF53 /* CoreDataStack.framework */; };
 		26456F191F766700003AEF53 /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F121F766675003AEF53 /* RequestFactory.swift */; };
 		26456F1A1F766703003AEF53 /* RequestList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26456F131F766675003AEF53 /* RequestList.plist */; };
 		26456F1B1F766707003AEF53 /* RequestQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F091F766675003AEF53 /* RequestQueue.swift */; };
@@ -47,6 +52,8 @@
 		26456F1F1F766739003AEF53 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F0F1F766675003AEF53 /* Transaction.swift */; };
 		26456F201F766739003AEF53 /* TransactionStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26456F101F766675003AEF53 /* TransactionStack.swift */; };
 		26533D0F1FD1828F004DBFB4 /* XImageViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26533D0E1FD1828F004DBFB4 /* XImageViewRouter.swift */; };
+		268C51532AD182BD00CE5482 /* CoreDataStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268C51522AD182BD00CE5482 /* CoreDataStack.framework */; };
+		268C51552AD182DC00CE5482 /* CoreNetworkStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268C51542AD182DC00CE5482 /* CoreNetworkStack.framework */; };
 		26A1E4381FC82EB2003F069E /* XImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1E4371FC82EB2003F069E /* XImageViewerController.swift */; };
 		26A1E43E1FC83B43003F069E /* DownloadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1E43D1FC83B43003F069E /* DownloadCell.swift */; };
 		26A1E4401FC8A730003F069E /* ZoomableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1E43F1FC8A730003F069E /* ZoomableImageView.swift */; };
@@ -77,10 +84,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				260A1F9C1FBF56AB0052C507 /* CoreDataStack.framework in Embed Frameworks */,
 				260A1F981FBF56AB0052C507 /* WebServiceKit.framework in Embed Frameworks */,
 				8F4393182761F3DA00F76253 /* FileSystemSDK.framework in Embed Frameworks */,
-				260A1F9E1FBF56AB0052C507 /* CoreNetworkStack.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,9 +115,9 @@
 		26456F101F766675003AEF53 /* TransactionStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionStack.swift; sourceTree = "<group>"; };
 		26456F121F766675003AEF53 /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
 		26456F131F766675003AEF53 /* RequestList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RequestList.plist; sourceTree = "<group>"; };
-		26456F151F766686003AEF53 /* CoreNetworkStack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreNetworkStack.framework; path = WebServiceKit/CoreNetworkStack.framework; sourceTree = "<group>"; };
-		26456F161F766686003AEF53 /* CoreDataStack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDataStack.framework; path = WebServiceKit/CoreDataStack.framework; sourceTree = "<group>"; };
 		26533D0E1FD1828F004DBFB4 /* XImageViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XImageViewRouter.swift; sourceTree = "<group>"; };
+		268C51522AD182BD00CE5482 /* CoreDataStack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreDataStack.framework; sourceTree = "<group>"; };
+		268C51542AD182DC00CE5482 /* CoreNetworkStack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreNetworkStack.framework; sourceTree = "<group>"; };
 		26A1E4371FC82EB2003F069E /* XImageViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XImageViewerController.swift; sourceTree = "<group>"; };
 		26A1E43D1FC83B43003F069E /* DownloadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadCell.swift; sourceTree = "<group>"; };
 		26A1E43F1FC8A730003F069E /* ZoomableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableImageView.swift; sourceTree = "<group>"; };
@@ -129,10 +134,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				260A1F9B1FBF56AB0052C507 /* CoreDataStack.framework in Frameworks */,
 				260A1F971FBF56AB0052C507 /* WebServiceKit.framework in Frameworks */,
 				8F4393172761F3DA00F76253 /* FileSystemSDK.framework in Frameworks */,
-				260A1F9D1FBF56AB0052C507 /* CoreNetworkStack.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,8 +143,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26456F171F766686003AEF53 /* CoreNetworkStack.framework in Frameworks */,
-				26456F181F766686003AEF53 /* CoreDataStack.framework in Frameworks */,
+				268C51532AD182BD00CE5482 /* CoreDataStack.framework in Frameworks */,
+				268C51552AD182DC00CE5482 /* CoreNetworkStack.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,8 +235,8 @@
 		26456F141F766686003AEF53 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				26456F161F766686003AEF53 /* CoreDataStack.framework */,
-				26456F151F766686003AEF53 /* CoreNetworkStack.framework */,
+				268C51542AD182DC00CE5482 /* CoreNetworkStack.framework */,
+				268C51522AD182BD00CE5482 /* CoreDataStack.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -387,6 +390,10 @@
 						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 					};
+					268C51562AD184C700CE5482 = {
+						CreatedOnToolsVersion = 14.2;
+						ProvisioningStyle = Automatic;
+					};
 					26A1E4321FC80A89003F069E = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
@@ -409,6 +416,7 @@
 				26456EFC1F766613003AEF53 /* WebServiceKit */,
 				260A1F841FBF568B0052C507 /* Example */,
 				26A1E4321FC80A89003F069E /* Aggregator */,
+				268C51562AD184C700CE5482 /* Aggregator-v2 */,
 			);
 		};
 /* End PBXProject section */
@@ -436,6 +444,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		268C515A2AD184DD00CE5482 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Merge Script\n\n# 1\n# Set bash script to exit immediately if any commands fail.\nset -e\n\n# 2\n# Setup some constants for use later on.\nFRAMEWORK_NAME=\"WebServiceKit\"\n\n#Here we create default directory structure on desktop if not exist\nmkdir -p \"${HOME}/Downloads/NextGenBuilds/${FRAMEWORK_NAME}/FatBuild\"\nmkdir -p \"${HOME}/Downloads/NextGenBuilds/${FRAMEWORK_NAME}/Release\"\n\n# 3\n# If remnants from a previous build exist, delete them.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi\n\n# 4\n# Build the framework for device and for simulator (using\n# all needed architectures).\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Debug -arch arm64  only_active_arch=no defines_module=yes -sdk \"iphoneos\"\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Debug -arch x86_64  only_active_arch=no defines_module=yes -sdk \"iphonesimulator\"\n\n# 5\n# Remove .framework file if exists on target-dir from previous run.\nif [ -d \"${HOME}/Downloads/NextGenBuilds/${FRAMEWORK_NAME}/FatBuild/${FRAMEWORK_NAME}.framework\" ]; then\nrm -rf \"${HOME}/Downloads/NextGenBuilds/${FRAMEWORK_NAME}/FatBuild/${FRAMEWORK_NAME}.framework\"\nfi\n#Remove release build also\n# Remove .framework file if exists on target-dir from previous run.\nif [ -d \"${HOME}/Downloads/NextGenBuilds/${FRAMEWORK_NAME}/Release/${FRAMEWORK_NAME}.framework\" ]; then\nrm -rf \"${HOME}/Downloads/NextGenBuilds/${FRAMEWORK_NAME}/Release/${FRAMEWORK_NAME}.framework\"\nfi\n\n# 6\n# Copy the device version of framework to target.\ncp -r \"${SRCROOT}/build/Debug-iphoneos/${FRAMEWORK_NAME}.framework\" \"${HOME}/Downloads/NextGenBuilds/${FRAMEWORK_NAME}/Release/${FRAMEWORK_NAME}.framework\"\n\ncp -r \"${SRCROOT}/build/Debug-iphoneos/${FRAMEWORK_NAME}.framework\" \"${HOME}/Downloads/NextGenBuilds/${FRAMEWORK_NAME}/FatBuild/${FRAMEWORK_NAME}.framework\"\n\n# 7\n# Replace the framework executable within the framework with\n# a new version created by merging the device and simulator\n# frameworks' executables with lipo.\nlipo -create -output \"${HOME}/Downloads/NextGenBuilds/${FRAMEWORK_NAME}/FatBuild/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Debug-iphoneos/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Debug-iphonesimulator/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\"\n\n# 8\n# Copy the Swift module mappings for the simulator into the\n# framework.  The device mappings already exist from step 6.\ncp -r \"${SRCROOT}/build/Debug-iphonesimulator/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule/\" \"${HOME}/Downloads/NextGenBuilds/${FRAMEWORK_NAME}/FatBuild/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule\"\n\n# 9\n# Delete the most recent build.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi\n";
+		};
 		26A1E4361FC80A8E003F069E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -683,6 +708,7 @@
 		26456F061F766613003AEF53 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -694,10 +720,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/WebServiceKit",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = WebServiceKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.swift.WebServiceKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -710,6 +737,7 @@
 		26456F071F766613003AEF53 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -721,10 +749,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/WebServiceKit",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = WebServiceKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.swift.WebServiceKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -734,9 +763,30 @@
 			};
 			name = Release;
 		};
+		268C51582AD184C700CE5482 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YS4F7VX5G2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		268C51592AD184C700CE5482 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YS4F7VX5G2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		26A1E4341FC80A89003F069E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M622GQ77LE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -746,6 +796,7 @@
 		26A1E4351FC80A89003F069E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M622GQ77LE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -778,6 +829,15 @@
 			buildConfigurations = (
 				26456F061F766613003AEF53 /* Debug */,
 				26456F071F766613003AEF53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		268C51572AD184C700CE5482 /* Build configuration list for PBXAggregateTarget "Aggregator-v2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				268C51582AD184C700CE5482 /* Debug */,
+				268C51592AD184C700CE5482 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
